@@ -193,7 +193,7 @@ for(let i=0;i<10;i++){const p=document.createElement('div');p.className='petal';
 // TTS — Google Translate only (natural French voice)
 function spk(t){
   if(!t){const c=CC[CI];if(!c)return;t=c.fr}
-  const url='https://translate.google.com/translate_tts?ie=UTF-8&tl=fr&client=tw-ob&q='+encodeURIComponent(t);
+  const url='https://translate.google.com/translate_tts?ie=UTF-8&tl=fr&client=gtx&q='+encodeURIComponent(t);
   const a=new Audio(url);
   const btns=document.querySelectorAll('.ab,.qa2');
   btns.forEach(x=>x.classList.add('playing'));
