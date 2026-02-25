@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Français A1–A2 — Слова з Парижу 🗼</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#fff5f5 0%,#fce4ec 50%,#f8e8e0 100%);min-height:100vh;overflow-x:hidden;color:#4a3040}
+h1,h2,.fN{font-family:'Playfair Display',serif}
+.petal{position:fixed;border-radius:50%;opacity:.35;animation:fall linear infinite;pointer-events:none;z-index:0}
+@keyframes fall{0%{transform:translateY(-10vh) rotate(0);opacity:.35}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+.wrap{max-width:900px;margin:0 auto;padding:16px;position:relative;z-index:1}
+
+/* ===== LEVEL SWITCHER ===== */
+.level-switch{display:flex;justify-content:center;gap:0;margin:10px auto 6px;background:#fff;border-radius:30px;overflow:hidden;box-shadow:0 2px 12px rgba(180,60,100,.15);width:fit-content}
+.level-btn{padding:10px 32px;font:700 15px 'Nunito',sans-serif;border:none;cursor:pointer;background:#fff;color:#b0809a;transition:all .3s;letter-spacing:1px}
+.level-btn.active{background:linear-gradient(135deg,#c2185b,#e91e63);color:#fff;box-shadow:0 2px 8px rgba(194,24,91,.3)}
+.level-btn:hover:not(.active){background:#fce4ec;color:#c2185b}
+
+/* ===== HEADER ===== */
+.hdr{text-align:center;padding:16px 0 4px}
+.hdr h1{font-size:1.65em;color:#8b1a4a;letter-spacing:.5px}
+.hdr h1 span{color:#c2185b}
+.hdr .sub{font-size:.88em;color:#b0809a;font-style:italic;margin-top:2px}
+.stars{text-align:center;color:#daa;font-size:.8em;letter-spacing:8px;margin:4px 0 8px}
+
+/* ===== NAV ===== */
+.nav{display:flex;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(180,60,100,.12);margin-bottom:14px}
+.nav-btn{flex:1;padding:12px 4px 10px;text-align:center;cursor:pointer;font:600 13px 'Nunito',sans-serif;color:#b0809a;border:none;background:transparent;transition:all .25s;border-bottom:3px solid transparent}
+.nav-btn.active{color:#c2185b;background:linear-gradient(180deg,#fce4ec,#fff);border-bottom-color:#c2185b}
+.nav-btn .ni{font-size:1.3em;display:block;margin-bottom:2px}
+
+/* ===== THEME BAR ===== */
+.tBar{display:flex;gap:6px;overflow-x:auto;padding:6px 0 10px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tBar::-webkit-scrollbar{display:none}
+.tb{white-space:nowrap;padding:7px 16px;border-radius:20px;border:1.5px solid #e8c4d4;background:#fff;color:#8b5e7a;font:600 12.5px 'Nunito',sans-serif;cursor:pointer;transition:all .2s;flex-shrink:0}
+.tb.active{background:linear-gradient(135deg,#c2185b,#e91e63);color:#fff;border-color:transparent;box-shadow:0 2px 8px rgba(194,24,91,.25)}
+
+/* ===== THEME HEADER ===== */
+.thdr{text-align:center;margin-bottom:10px}
+.uB{display:inline-block;background:#f8d7e0;color:#c2185b;padding:3px 14px;border-radius:12px;font:700 11px 'Nunito',sans-serif;letter-spacing:1.5px;margin-bottom:4px}
+.fN{color:#c2185b;font-size:1.2em;font-style:italic;font-weight:600}
+.uN{font-size:.82em;color:#b0809a;margin-top:2px}
+.stats{display:flex;justify-content:center;gap:18px;font-size:.82em;color:#8b5e7a;margin:8px 0;border-bottom:1px solid #f0d0df;padding-bottom:8px}
+.stats span::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.sk::before{background:#66bb6a!important}.su::before{background:#ef5350!important}.st::before{background:#ffb74d!important}
+
+/* ===== CARDS ===== */
+.cNum{text-align:center;color:#c2185b;font-size:.85em;margin-bottom:6px}
+.cBox{perspective:800px;cursor:pointer;margin:0 auto;max-width:600px}
+.cI{position:relative;height:220px;transition:transform .5s;transform-style:preserve-3d}
+.cI.flipped{transform:rotateY(180deg)}
+.cF,.cB{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;background:#fff;box-shadow:0 4px 20px rgba(180,60,100,.12)}
+.cB{transform:rotateY(180deg);background:linear-gradient(135deg,#fff5f8,#fff)}
+.cL{font-size:.7em;letter-spacing:3px;color:#c2185b;text-transform:uppercase;margin-bottom:8px}
+.cW{font-size:1.6em;font-weight:700;color:#4a3040;text-align:center}
+.cH{font-size:.78em;color:#cba;margin-top:10px}
+.cCt{font-size:.75em;color:#d4a0b8;margin-top:6px;font-style:italic}
+.pF{height:3px;background:linear-gradient(90deg,#c2185b,#e91e63);border-radius:2px;transition:width .3s;margin-bottom:8px}
+
+/* ===== BUTTONS ===== */
+.btns{display:flex;justify-content:center;align-items:center;gap:10px;margin:14px 0 8px}
+.ab{width:52px;height:52px;border-radius:50%;border:none;font-size:1.2em;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.ab:active{transform:scale(.92)}
+.ab.no{background:#ef5350;color:#fff;box-shadow:0 3px 10px rgba(239,83,80,.3)}
+.ab.ok{background:#66bb6a;color:#fff;box-shadow:0 3px 10px rgba(102,187,106,.3)}
+.ab.sp{background:#fff;color:#c2185b;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.ab.ar{background:#fff;color:#8b5e7a;box-shadow:0 2px 8px rgba(0,0,0,.06);width:40px;height:40px;font-size:1em}
+.ab.playing{animation:pulse .5s infinite alternate}
+@keyframes pulse{to{box-shadow:0 0 16px rgba(194,24,91,.4)}}
+
+/* ===== MODE BUTTONS ===== */
+.mbar{display:flex;justify-content:center;gap:8px;margin:8px 0}
+.mbtn{padding:6px 14px;border-radius:16px;border:1.5px solid #e8c4d4;background:#fff;color:#8b5e7a;font:600 12px 'Nunito',sans-serif;cursor:pointer;transition:all .2s}
+.mbtn.active{background:#c2185b;color:#fff;border-color:transparent}
+.foot{text-align:center;font-size:.72em;color:#c8a8b8;margin-top:8px;font-style:italic}
+
+/* ===== RESULT OVERLAY ===== */
+.rov{display:none;position:absolute;inset:0;background:rgba(255,245,248,.96);z-index:10;flex-direction:column;align-items:center;justify-content:center;border-radius:18px;text-align:center;padding:30px}
+.rov.vis{display:flex}
+.rov .ri{font-size:2em;margin-bottom:6px}
+.rov .rt{font-family:'Playfair Display',serif;font-size:1.5em;color:#c2185b;margin-bottom:4px}
+.rov .rs{font-size:2.5em;font-weight:700;color:#8b1a4a;margin:8px 0}
+.rov .rl{font-size:.85em;color:#b0809a}
+.rov button{margin-top:16px;padding:10px 28px;border-radius:20px;border:none;background:linear-gradient(135deg,#c2185b,#e91e63);color:#fff;font:700 14px 'Nunito',sans-serif;cursor:pointer;box-shadow:0 3px 10px rgba(194,24,91,.25)}
+
+/* ===== SCREENS ===== */
+.scr{display:none}.scr.active{display:block}
+.sWrap{position:relative}
+
+/* ===== QUIZ ===== */
+.qP{height:3px;background:linear-gradient(90deg,#c2185b,#e91e63);border-radius:2px;transition:width .3s;margin-bottom:10px}
+.qHead{text-align:center;margin-bottom:12px}
+.qHead .ql{font-size:.82em;color:#b0809a}
+.qHead .qw{font-size:1.5em;font-weight:700;color:#4a3040;margin:4px 0}
+.qa2{width:44px;height:44px;border-radius:50%;border:none;background:#fff;color:#c2185b;font-size:1.1em;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08);margin:4px auto;display:block}
+.qO{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:500px;margin:0 auto}
+.qob{padding:14px 12px;border-radius:14px;border:2px solid #e8c4d4;background:#fff;font:600 14px 'Nunito',sans-serif;color:#4a3040;cursor:pointer;text-align:left;transition:all .2s;display:flex;align-items:center;gap:8px}
+.qob:hover:not(.dis){border-color:#c2185b;background:#fff5f8}
+.qob .ol{display:inline-flex;width:26px;height:26px;border-radius:50%;background:#f8d7e0;color:#c2185b;font:700 12px 'Nunito',sans-serif;align-items:center;justify-content:center;flex-shrink:0}
+.qob.ok{border-color:#66bb6a;background:#e8f5e9}.qob.ok .ol{background:#66bb6a;color:#fff}
+.qob.no{border-color:#ef5350;background:#ffebee}.qob.no .ol{background:#ef5350;color:#fff}
+.qob.dis{pointer-events:none;opacity:.85}
+.qTimer{height:3px;background:#c2185b;border-radius:2px;transition:width .1s linear;margin:10px 0 0}
+.qN{text-align:center;margin-top:12px}
+.qN button{padding:10px 28px;border-radius:20px;border:none;background:linear-gradient(135deg,#c2185b,#e91e63);color:#fff;font:700 14px 'Nunito',sans-serif;cursor:pointer}
+
+/* ===== TYPE ===== */
+.tyP{height:3px;background:linear-gradient(90deg,#c2185b,#e91e63);border-radius:2px;transition:width .3s;margin-bottom:10px}
+.tyHead{text-align:center;margin-bottom:12px}
+.tyHead .tyl{font-size:.82em;color:#b0809a}
+.tyHead .tyw{font-size:1.5em;font-weight:700;color:#4a3040;margin:4px 0}
+.tyHead .tyh{font-size:.75em;color:#cba;font-style:italic}
+.ti{width:100%;max-width:400px;display:block;margin:10px auto;padding:12px 16px;border-radius:12px;border:2px solid #e8c4d4;font:600 16px 'Nunito',sans-serif;color:#4a3040;text-align:center;outline:none;transition:border-color .2s}
+.ti:focus{border-color:#c2185b}
+.ti.ok{border-color:#66bb6a;background:#e8f5e9}
+.ti.no{border-color:#ef5350;background:#ffebee}
+.tf{text-align:center;font:600 14px 'Nunito',sans-serif;margin-top:8px;min-height:24px}
+.tok{color:#66bb6a}.tno{color:#ef5350}
+.tyN{text-align:center;margin-top:12px}
+.tyN button{padding:10px 28px;border-radius:20px;border:none;background:linear-gradient(135deg,#c2185b,#e91e63);color:#fff;font:700 14px 'Nunito',sans-serif;cursor:pointer}
+.tyBt{margin:10px auto;display:block;padding:10px 28px;border-radius:20px;border:2px solid #c2185b;background:#fff;color:#c2185b;font:700 14px 'Nunito',sans-serif;cursor:pointer}
+
+/* ===== MATCH ===== */
+.mG{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:600px;margin:10px auto}
+.mc{padding:16px 8px;border-radius:12px;border:2px solid #e8c4d4;background:#fff;font:600 13px 'Nunito',sans-serif;color:#4a3040;cursor:pointer;transition:all .25s;text-align:center;min-height:54px;display:flex;align-items:center;justify-content:center}
+.mc:hover:not(.mat){border-color:#c2185b;background:#fff5f8}
+.mc.sel{border-color:#c2185b;background:#fce4ec;box-shadow:0 0 0 2px rgba(194,24,91,.2)}
+.mc.mat{border-color:#66bb6a;background:#e8f5e9;opacity:.6;pointer-events:none}
+.mc.wf{border-color:#ef5350;background:#ffebee;animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* ===== DATE/TIME MODULE ===== */
+.dt-section{max-width:600px;margin:0 auto}
+.dt-nav{display:flex;gap:6px;overflow-x:auto;padding:6px 0 12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.dt-nav::-webkit-scrollbar{display:none}
+.dt-btn{white-space:nowrap;padding:8px 18px;border-radius:20px;border:2px solid #e8c4d4;background:#fff;color:#8b5e7a;font:600 13px 'Nunito',sans-serif;cursor:pointer;transition:all .2s;flex-shrink:0}
+.dt-btn.active{background:linear-gradient(135deg,#c2185b,#e91e63);color:#fff;border-color:transparent}
+.dt-card{background:#fff;border-radius:18px;padding:24px;box-shadow:0 4px 20px rgba(180,60,100,.1);margin-bottom:16px}
+.dt-card h3{font-family:'Playfair Display',serif;color:#c2185b;font-size:1.15em;margin-bottom:12px;text-align:center}
+.dt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-bottom:16px}
+.dt-item{padding:10px;border-radius:10px;background:#fce4ec;text-align:center;font:600 13px 'Nunito',sans-serif;color:#4a3040;cursor:default;transition:all .2s}
+.dt-item .fr{color:#c2185b;font-weight:700;font-size:1.05em}
+.dt-item .ua{font-size:.82em;color:#8b5e7a;margin-top:2px}
+
+/* Clock */
+.clock-container{text-align:center;margin:16px 0}
+.clock-svg{width:200px;height:200px}
+.clock-face{fill:#fff;stroke:#c2185b;stroke-width:2}
+.clock-num{font:600 14px 'Nunito',sans-serif;fill:#4a3040}
+.clock-hand-hour{stroke:#8b1a4a;stroke-width:4;stroke-linecap:round}
+.clock-hand-minute{stroke:#c2185b;stroke-width:3;stroke-linecap:round}
+.clock-center{fill:#c2185b}
+.clock-question{font-size:1.1em;font-weight:700;color:#4a3040;margin:12px 0 8px;text-align:center}
+
+/* Exercise area */
+.ex-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:400px;margin:10px auto}
+.ex-opt{padding:12px;border-radius:12px;border:2px solid #e8c4d4;background:#fff;font:600 14px 'Nunito',sans-serif;color:#4a3040;cursor:pointer;text-align:center;transition:all .2s}
+.ex-opt:hover:not(.dis){border-color:#c2185b;background:#fff5f8}
+.ex-opt.ok{border-color:#66bb6a;background:#e8f5e9}
+.ex-opt.no{border-color:#ef5350;background:#ffebee}
+.ex-opt.dis{pointer-events:none;opacity:.85}
+.ex-score{text-align:center;font:600 14px 'Nunito',sans-serif;color:#8b5e7a;margin:8px 0}
+.ex-next{display:block;margin:12px auto;padding:10px 28px;border-radius:20px;border:none;background:linear-gradient(135deg,#c2185b,#e91e63);color:#fff;font:700 14px 'Nunito',sans-serif;cursor:pointer}
+
+/* Drag & order exercise */
+.order-list{display:flex;flex-direction:column;gap:6px;max-width:350px;margin:10px auto}
+.order-item{padding:12px 16px;border-radius:12px;border:2px solid #e8c4d4;background:#fff;font:600 14px 'Nunito',sans-serif;color:#4a3040;cursor:grab;transition:all .2s;display:flex;align-items:center;gap:10px;user-select:none}
+.order-item:active{cursor:grabbing;box-shadow:0 4px 16px rgba(194,24,91,.2)}
+.order-item .num{width:26px;height:26px;border-radius:50%;background:#f8d7e0;color:#c2185b;font:700 12px 'Nunito',sans-serif;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.order-item.correct{border-color:#66bb6a;background:#e8f5e9}
+.order-item.wrong{border-color:#ef5350;background:#ffebee}
+
+/* Fill-in exercise */
+.fill-sentence{font-size:1.1em;color:#4a3040;text-align:center;margin:12px 0;line-height:1.6}
+.fill-input{display:inline-block;width:120px;padding:4px 8px;border:none;border-bottom:2px solid #c2185b;font:600 16px 'Nunito',sans-serif;color:#c2185b;text-align:center;outline:none;background:transparent}
+
+/* Toast */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:#4a3040;color:#fff;padding:10px 20px;border-radius:20px;font:600 13px 'Nunito',sans-serif;opacity:0;transition:all .4s;z-index:100;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* Download banner */
+.dlBanner{display:none;background:#fff3cd;color:#856404;padding:8px 16px;border-radius:10px;font-size:.8em;text-align:center;margin-bottom:10px;position:relative}
+.dlBanner .cls{position:absolute;right:10px;top:6px;cursor:pointer;font-size:1.1em;opacity:.6}
+
+/* ===== ANIMATION ===== */
+.ao{animation:slideOut .2s forwards}
+.ai{animation:slideIn .3s forwards}
+@keyframes slideOut{to{transform:translateX(-40px);opacity:0}}
+@keyframes slideIn{from{transform:translateX(40px);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:600px){
+  .hdr h1{font-size:1.25em}
+  .qO{grid-template-columns:1fr}
+  .mG{grid-template-columns:repeat(3,1fr)}
+  .ex-options{grid-template-columns:1fr}
+  .dt-grid{grid-template-columns:repeat(2,1fr)}
+  .level-btn{padding:8px 20px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<div id="dlBanner" class="dlBanner">
+🔊 Для озвучки: завантажте файл ⬇️ і відкрийте в Chrome
+<span class="cls" onclick="this.parentElement.style.display='none'">✕</span>
+</div>
+
+<div class="wrap">
+
+<!-- ===== LEVEL SWITCHER ===== -->
+<div class="level-switch">
+  <button class="level-btn active" onclick="switchLevel('A2',this)">A2</button>
+  <button class="level-btn" onclick="switchLevel('A1',this)">A1</button>
+  <button class="level-btn" onclick="switchLevel('DT',this)">📅 Дата / Час</button>
+</div>
+
+<div class="hdr">
+  <h1 id="mainTitle">🗼Français <span>A2</span> → Українська</h1>
+  <div class="sub" id="mainSub">Les mots de Paris — Слова з Парижу</div>
+</div>
+<div class="stars">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+<!-- ===== MAIN CONTENT (A1/A2 Flashcards) ===== -->
+<div id="flashcardsSection">
+  <div class="nav">
+    <button class="nav-btn active" onclick="sw('cards')"><span class="ni">🃏</span>Картки</button>
+    <button class="nav-btn" onclick="sw('quiz')"><span class="ni">🎯</span>Квіз</button>
+    <button class="nav-btn" onclick="sw('type')"><span class="ni">✍️</span>Написання</button>
+    <button class="nav-btn" onclick="sw('match')"><span class="ni">🧩</span>Пари</button>
+  </div>
+
+  <div id="tBar" class="tBar"></div>
+
+  <div class="thdr">
+    <div class="uB" id="uB">UNITÉ 1–12</div>
+    <div class="fN" id="fN">Tous les thèmes</div>
+    <div class="uN" id="uN">Усі теми — <span id="tC">0</span> слів</div>
+  </div>
+  <div class="stats">
+    <span class="sk">Знаю: <b id="kC">0</b></span>
+    <span class="su">Вчу: <b id="uC">0</b></span>
+    <span class="st">Всього: <b id="tC2">0</b></span>
+  </div>
+
+  <!-- CARDS -->
+  <div id="sCards" class="scr active">
+    <div class="sWrap">
+      <div class="cNum"><span id="cN">1</span> / <span id="tN">0</span></div>
+      <div style="max-width:600px;margin:0 auto"><div class="pF" id="pF" style="width:0%"></div></div>
+      <div id="cArea">
+        <div id="cBox" class="cBox">
+          <div class="cI" id="cI">
+            <div class="cF"><div class="cL" id="fL">Français</div><div class="cW" id="fW">…</div><div class="cH">натисни, щоб перевернути ✧</div></div>
+            <div class="cB"><div class="cL" id="bL">Українська</div><div class="cW" id="bW">…</div><div class="cCt" id="bCt"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="btns">
+        <button class="ab no" onclick="mk(0)">✗</button>
+        <button class="ab ar" onclick="pv()">‹</button>
+        <button class="ab sp" onclick="spk()">🔊</button>
+        <button class="ab ar" onclick="nx()">›</button>
+        <button class="ab ok" onclick="mk(1)">✓</button>
+      </div>
+      <div style="text-align:center;font-size:.78em;color:#b0809a">не знаю<span style="display:inline-block;width:100px"></span>знаю</div>
+      <div class="mbar">
+        <button class="mbtn active" onclick="sM('all',this)">Усі</button>
+        <button class="mbtn" onclick="sM('unknown',this)">Незнайомі</button>
+        <button class="mbtn" onclick="sM('shuffle',this)">Перемішати</button>
+        <button class="mbtn" onclick="sM('reverse',this)">UA→FR</button>
+      </div>
+      <div class="rov" id="rCards">
+        <div class="ri">🗼</div>
+        <div class="rt">Magnifique!</div>
+        <div class="rs" id="rSc">0%</div>
+        <div class="rl">слів вивчено</div>
+        <button onclick="re()">Ще раз</button>
+        <button onclick="reU()" style="background:#fff;color:#c2185b;border:2px solid #c2185b;margin-top:8px">Незнайомі</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="sQuiz" class="scr">
+    <div class="sWrap">
+      <div class="ex-score">Рахунок: <span id="qS">0</span> / <span id="qT">0</span></div>
+      <div class="qP" id="qP" style="width:0%"></div>
+      <div class="qHead">
+        <div class="ql" id="qL">Як перекласти?</div>
+        <div class="qw" id="qW">…</div>
+        <div id="qA" style="display:flex;justify-content:center"><button class="qa2" onclick="spkQ()">🔊</button></div>
+      </div>
+      <div class="qO" id="qO"></div>
+      <div style="max-width:500px;margin:0 auto"><div class="qTimer" id="qTimer" style="width:100%"></div></div>
+      <div class="qN" id="qN" style="display:none"><button onclick="nxQ()">Далі →</button></div>
+      <div class="mbar">
+        <button class="mbtn active" onclick="sQM('fr2ua',this)">FR→UA</button>
+        <button class="mbtn" onclick="sQM('ua2fr',this)">UA→FR</button>
+        <button class="mbtn" onclick="sQM('audio',this)">🔊 Аудіо</button>
+      </div>
+      <div class="rov" id="rQuiz">
+        <div class="ri">🎯</div>
+        <div class="rt">Résultat!</div>
+        <div class="rs" id="rQS">0%</div>
+        <div class="rl">правильних</div>
+        <button onclick="stQ()">Ще раз</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPE -->
+  <div id="sType" class="scr">
+    <div class="sWrap">
+      <div class="ex-score">Рахунок: <span id="tyS">0</span> / <span id="tyT">0</span></div>
+      <div class="tyP" id="tyP" style="width:0%"></div>
+      <div class="tyHead">
+        <div class="tyl" id="tyL">Напишіть французькою:</div>
+        <div class="tyw" id="tyW">…</div>
+        <div class="tyh" id="tyH"></div>
+        <div id="tyA" style="display:flex;justify-content:center;margin-top:4px"><button class="qa2" onclick="spkTy()">🔊</button></div>
+      </div>
+      <input class="ti" id="tyI" autocomplete="off" autocapitalize="off" placeholder="Введіть відповідь…">
+      <div class="tf" id="tyF"></div>
+      <button class="tyBt" onclick="chTy()">Перевірити ✓</button>
+      <div class="tyN" id="tyN" style="display:none"><button onclick="nxTy()">Далі →</button></div>
+      <div class="rov" id="rType">
+        <div class="ri">✍️</div>
+        <div class="rt">Bravo!</div>
+        <div class="rs" id="rTS">0%</div>
+        <div class="rl">правильно</div>
+        <button onclick="stTy()">Ще раз</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MATCH -->
+  <div id="sMatch" class="scr">
+    <div class="sWrap">
+      <div class="ex-score">Знайди пари: <span id="mF">0</span> / <span id="mT">0</span></div>
+      <div class="qP" id="mP" style="width:0%"></div>
+      <div class="mG" id="mG"></div>
+      <div style="text-align:center;margin-top:8px"><button class="mbtn" onclick="stMa()">Нові пари →</button></div>
+      <div class="rov" id="rMatch">
+        <div class="ri">🧩</div>
+        <div class="rt">Parfait! 🎉</div>
+        <div class="rl">Усі пари знайдено!</div>
+        <button onclick="stMa()">Ще раунд</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DATE/TIME MODULE ===== -->
+<div id="dateTimeSection" style="display:none">
+  <div class="dt-section">
+    <div class="dt-nav">
+      <button class="dt-btn active" onclick="dtSwitch('learn',this)">📖 Вивчення</button>
+      <button class="dt-btn" onclick="dtSwitch('clock',this)">🕐 Годинник</button>
+      <button class="dt-btn" onclick="dtSwitch('days',this)">📅 Дні тижня</button>
+      <button class="dt-btn" onclick="dtSwitch('months',this)">🗓 Місяці</button>
+      <button class="dt-btn" onclick="dtSwitch('dates',this)">✍️ Дати</button>
+      <button class="dt-btn" onclick="dtSwitch('quiz',this)">🎯 Квіз</button>
+    </div>
+
+    <!-- LEARN -->
+    <div id="dtLearn" class="dt-sub active">
+      <div class="dt-card">
+        <h3>Les jours de la semaine — Дні тижня</h3>
+        <div class="dt-grid" id="dtDaysGrid"></div>
+      </div>
+      <div class="dt-card">
+        <h3>Les mois de l'année — Місяці</h3>
+        <div class="dt-grid" id="dtMonthsGrid"></div>
+      </div>
+      <div class="dt-card">
+        <h3>Les saisons — Пори року</h3>
+        <div class="dt-grid" id="dtSeasonsGrid"></div>
+      </div>
+      <div class="dt-card">
+        <h3>L'heure — Час</h3>
+        <div class="dt-grid" id="dtTimeGrid"></div>
+      </div>
+      <div class="dt-card">
+        <h3>Корисні вирази</h3>
+        <div class="dt-grid" id="dtExpGrid"></div>
+      </div>
+    </div>
+
+    <!-- CLOCK -->
+    <div id="dtClock" class="dt-sub" style="display:none">
+      <div class="dt-card">
+        <h3>Котра година? — Quelle heure est-il?</h3>
+        <div class="clock-container">
+          <svg class="clock-svg" viewBox="0 0 200 200" id="clockSvg">
+            <circle cx="100" cy="100" r="90" class="clock-face"/>
+            <g id="clockNumbers"></g>
+            <line id="clockHour" x1="100" y1="100" x2="100" y2="55" class="clock-hand-hour"/>
+            <line id="clockMinute" x1="100" y1="100" x2="100" y2="35" class="clock-hand-minute"/>
+            <circle cx="100" cy="100" r="4" class="clock-center"/>
+          </svg>
+        </div>
+        <div class="clock-question" id="clockQ">Котра година?</div>
+        <div class="ex-options" id="clockOpts"></div>
+        <div class="ex-score" id="clockScore">Рахунок: 0 / 0</div>
+        <button class="ex-next" id="clockNext" style="display:none" onclick="nextClock()">Далі →</button>
+      </div>
+    </div>
+
+    <!-- DAYS ORDER -->
+    <div id="dtDays" class="dt-sub" style="display:none">
+      <div class="dt-card">
+        <h3>Розставте дні тижня по порядку</h3>
+        <div class="order-list" id="daysOrder"></div>
+        <button class="ex-next" onclick="checkDaysOrder()">Перевірити ✓</button>
+        <div class="ex-score" id="daysResult"></div>
+        <button class="ex-next" onclick="startDaysOrder()" style="background:#fff;color:#c2185b;border:2px solid #c2185b">Ще раз 🔄</button>
+      </div>
+    </div>
+
+    <!-- MONTHS ORDER -->
+    <div id="dtMonths" class="dt-sub" style="display:none">
+      <div class="dt-card">
+        <h3>Розставте місяці по порядку</h3>
+        <div class="order-list" id="monthsOrder"></div>
+        <button class="ex-next" onclick="checkMonthsOrder()">Перевірити ✓</button>
+        <div class="ex-score" id="monthsResult"></div>
+        <button class="ex-next" onclick="startMonthsOrder()" style="background:#fff;color:#c2185b;border:2px solid #c2185b">Ще раз 🔄</button>
+      </div>
+    </div>
+
+    <!-- DATES WRITING -->
+    <div id="dtDates" class="dt-sub" style="display:none">
+      <div class="dt-card">
+        <h3>Напишіть дату французькою</h3>
+        <div class="clock-question" id="dateQ"></div>
+        <input class="ti" id="dateInput" autocomplete="off" placeholder="Наприклад: le 5 mars">
+        <button class="tyBt" onclick="checkDate()">Перевірити ✓</button>
+        <div class="tf" id="dateFb"></div>
+        <button class="ex-next" id="dateNext" style="display:none" onclick="nextDate()">Далі →</button>
+        <div class="ex-score" id="dateScore">Рахунок: 0 / 0</div>
+      </div>
+    </div>
+
+    <!-- QUIZ DT -->
+    <div id="dtQuizSec" class="dt-sub" style="display:none">
+      <div class="dt-card">
+        <h3>Міні-квіз: Дата, час, місяці</h3>
+        <div class="clock-question" id="dtQQ"></div>
+        <div class="ex-options" id="dtQO"></div>
+        <button class="ex-next" id="dtQNext" style="display:none" onclick="nextDtQuiz()">Далі →</button>
+        <div class="ex-score" id="dtQScore">Рахунок: 0 / 0</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="foot">Свайп ← → • Пробіл — перевернути • 🔊 — озвучка</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ========== TTS ==========
+function spk(t){
+  if(!t){const c=CC[CI];if(!c)return;t=c.fr}
+  const url='https://translate.google.com/translate_tts?ie=UTF-8&tl=fr&client=tw-ob&q='+encodeURIComponent(t);
+  const a=new Audio(url);
+  const btns=document.querySelectorAll('.ab,.qa2');
+  btns.forEach(x=>x.classList.add('playing'));
+  a.onended=()=>btns.forEach(x=>x.classList.remove('playing'));
+  a.onerror=()=>{btns.forEach(x=>x.classList.remove('playing'));showToast('⬇️ Завантажте файл і відкрийте в Chrome для озвучки')};
+  a.play().catch(()=>{btns.forEach(x=>x.classList.remove('playing'));showToast('⬇️ Завантажте файл і відкрийте в Chrome для озвучки')});
+}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000)}
+
+// ========== A2 THEMES MAP ==========
+const TM_A2={"Дозвілля":{f:"Les loisirs",u:"Unité 1"},"Життєвий шлях":{f:"Parcours de vie",u:"Unité 1"},"Спогади":{f:"Les souvenirs",u:"Unité 2"},"Пейзажі та погода":{f:"Les paysages et la météo",u:"Unité 2"},"Меблі та житло":{f:"Le mobilier",u:"Unité 3"},"Житло та оренда":{f:"Le logement",u:"Unité 3"},"Місто":{f:"La ville",u:"Unité 3"},"Риси характеру":{f:"Les traits de caractère",u:"Unité 4"},"Зовнішність":{f:"L'apparence physique",u:"Unité 4"},"Наука і техніка":{f:"Sciences et techniques",u:"Unité 5"},"Комунікації":{f:"Les communications",u:"Unité 5"},"Ресторан":{f:"La restauration",u:"Unité 6"},"Продукти":{f:"Les aliments",u:"Unité 6"},"Тіло та здоров'я":{f:"Le corps et la santé",u:"Unité 7"},"Медицина":{f:"La médecine",u:"Unité 7"},"Медіа":{f:"Les médias",u:"Unité 8"},"Преса та ТБ":{f:"La presse et la télé",u:"Unité 8"},"Ручна робота":{f:"Le travail manuel",u:"Unité 9"},"Споживання":{f:"La consommation",u:"Unité 9"},"Подорожі":{f:"Le voyage",u:"Unité 10"},"Туризм":{f:"Le tourisme",u:"Unité 10"},"Навчання":{f:"Les études",u:"Unité 11"},"Світ праці":{f:"Le monde du travail",u:"Unité 11"},"Географія та довкілля":{f:"Géographie et environnement",u:"Unité 12"},"Тварини":{f:"Les animaux",u:"Unité 12"}};
+
+// ========== A1 THEMES MAP ==========
+const TM_A1={"Привітання":{f:"Les salutations",u:"Thème 1"},"Числа":{f:"Les nombres",u:"Thème 2"},"Кольори":{f:"Les couleurs",u:"Thème 3"},"Сім'я":{f:"La famille",u:"Thème 4"},"Їжа і напої":{f:"La nourriture et les boissons",u:"Thème 5"},"Одяг":{f:"Les vêtements",u:"Thème 6"},"Транспорт":{f:"Les transports",u:"Thème 7"},"Професії":{f:"Les professions",u:"Thème 8"},"Дім":{f:"La maison",u:"Thème 9"},"Школа":{f:"L'école",u:"Thème 10"},"Тіло":{f:"Le corps",u:"Thème 11"},"Дієслова":{f:"Les verbes courants",u:"Thème 12"},"Прикметники":{f:"Les adjectifs",u:"Thème 13"},"Повсякдення":{f:"La vie quotidienne",u:"Thème 14"}};
+
+// ========== A2 WORDS (same as original) ==========
+const V_A2=[
+{fr:"le château",ua:"замок",t:"Дозвілля"},{fr:"le cinéma",ua:"кінотеатр",t:"Дозвілля"},{fr:"le cirque",ua:"цирк",t:"Дозвілля"},{fr:"le monument",ua:"пам'ятник",t:"Дозвілля"},{fr:"le musée",ua:"музей",t:"Дозвілля"},{fr:"le théâtre",ua:"театр",t:"Дозвілля"},{fr:"sortir",ua:"виходити, гуляти",t:"Дозвілля"},{fr:"aller au concert",ua:"ходити на концерт",t:"Дозвілля"},{fr:"un festival",ua:"фестиваль",t:"Дозвілля"},{fr:"faire une balade",ua:"прогулюватися",t:"Дозвілля"},{fr:"une promenade",ua:"прогулянка",t:"Дозвілля"},{fr:"faire une visite guidée",ua:"відвідати екскурсію з гідом",t:"Дозвілля"},{fr:"visiter une exposition",ua:"відвідати виставку",t:"Дозвілля"},{fr:"un spectacle",ua:"вистава, шоу",t:"Дозвілля"},{fr:"voir une pièce de théâtre",ua:"дивитися п'єсу в театрі",t:"Дозвілля"},{fr:"l'accrobranche",ua:"мотузковий парк",t:"Дозвілля"},{fr:"la randonnée",ua:"піший похід",t:"Дозвілля"},{fr:"le canoë / kayak",ua:"каное / каяк",t:"Дозвілля"},{fr:"les sports aquatiques",ua:"водні види спорту",t:"Дозвілля"},{fr:"l'escalade",ua:"скелелазіння",t:"Дозвілля"},{fr:"le football",ua:"футбол",t:"Дозвілля"},{fr:"le vélo",ua:"велосипед",t:"Дозвілля"},{fr:"le jardinage",ua:"садівництво",t:"Дозвілля"},{fr:"le (stand-up) paddle",ua:"стендап-падл",t:"Дозвілля"},{fr:"le bricolage",ua:"майстрування, ремонт",t:"Дозвілля"},{fr:"les jeux vidéo",ua:"відеоігри",t:"Дозвілля"},{fr:"les jeux de société",ua:"настільні ігри",t:"Дозвілля"},{fr:"le judo",ua:"дзюдо",t:"Дозвілля"},{fr:"la peinture",ua:"малювання, живопис",t:"Дозвілля"},{fr:"bricoler",ua:"майструвати",t:"Дозвілля"},{fr:"être amateur / amatrice",ua:"бути аматором",t:"Дозвілля"},{fr:"professionnel(le)",ua:"професійний",t:"Дозвілля"},{fr:"faire une compétition",ua:"брати участь у змаганні",t:"Дозвілля"},{fr:"jardiner",ua:"працювати в саду",t:"Дозвілля"},{fr:"jouer au foot",ua:"грати у футбол",t:"Дозвілля"},{fr:"peindre / faire un tableau",ua:"малювати картину",t:"Дозвілля"},{fr:"regarder une série",ua:"дивитися серіал",t:"Дозвілля"},
+{fr:"vivre",ua:"жити",t:"Життєвий шлях"},{fr:"avoir un coup de foudre",ua:"закохатися з першого погляду",t:"Життєвий шлях"},{fr:"avoir un enfant",ua:"мати дитину",t:"Життєвий шлях"},{fr:"déménager",ua:"переїжджати",t:"Життєвий шлях"},{fr:"être célibataire",ua:"бути самотнім",t:"Життєвий шлях"},{fr:"être en couple",ua:"бути в парі",t:"Життєвий шлях"},{fr:"faire connaissance",ua:"познайомитися",t:"Життєвий шлях"},{fr:"grandir",ua:"рости",t:"Життєвий шлях"},{fr:"naître",ua:"народитися",t:"Життєвий шлях"},{fr:"rencontrer quelqu'un",ua:"зустріти когось",t:"Життєвий шлях"},{fr:"se faire des amis",ua:"заводити друзів",t:"Життєвий шлях"},{fr:"se marier",ua:"одружитися",t:"Життєвий шлях"},{fr:"se séparer",ua:"розлучитися",t:"Життєвий шлях"},{fr:"s'installer",ua:"оселитися",t:"Життєвий шлях"},{fr:"tomber amoureux",ua:"закохатися",t:"Життєвий шлях"},{fr:"le conjoint / la conjointe",ua:"партнер",t:"Життєвий шлях"},{fr:"le couple",ua:"пара",t:"Життєвий шлях"},{fr:"l'enfant",ua:"дитина",t:"Життєвий шлях"},{fr:"la femme",ua:"жінка / дружина",t:"Життєвий шлях"},{fr:"le mari",ua:"чоловік (муж)",t:"Життєвий шлях"},{fr:"la rencontre",ua:"зустріч",t:"Життєвий шлях"},{fr:"la vie de famille",ua:"сімейне життя",t:"Життєвий шлях"},{fr:"chercher du travail",ua:"шукати роботу",t:"Життєвий шлях"},{fr:"faire ses études",ua:"навчатися",t:"Життєвий шлях"},{fr:"faire un stage",ua:"проходити стажування",t:"Життєвий шлях"},{fr:"obtenir un diplôme",ua:"отримати диплом",t:"Життєвий шлях"},{fr:"travailler dans une entreprise",ua:"працювати в компанії",t:"Життєвий шлях"},
+{fr:"l'album photos",ua:"фотоальбом",t:"Спогади"},{fr:"oublier",ua:"забувати",t:"Спогади"},{fr:"raconter un souvenir",ua:"розповідати спогад",t:"Спогади"},{fr:"se rappeler",ua:"згадувати",t:"Спогади"},{fr:"se souvenir",ua:"пам'ятати",t:"Спогади"},{fr:"le goût",ua:"смак",t:"Спогади"},{fr:"l'odeur",ua:"запах",t:"Спогади"},{fr:"le parfum",ua:"парфум, аромат",t:"Спогади"},{fr:"sentir bon ≠ sentir mauvais",ua:"пахнути добре ≠ погано",t:"Спогади"},{fr:"voir",ua:"бачити",t:"Спогади"},{fr:"la vue",ua:"зір, вид",t:"Спогади"},{fr:"agréable",ua:"приємний",t:"Спогади"},{fr:"inoubliable",ua:"незабутній",t:"Спогади"},{fr:"joyeux",ua:"радісний",t:"Спогади"},{fr:"difficile",ua:"складний",t:"Спогади"},{fr:"heureux",ua:"щасливий",t:"Спогади"},{fr:"triste",ua:"сумний",t:"Спогади"},
+{fr:"la côte",ua:"узбережжя",t:"Пейзажі та погода"},{fr:"l'île",ua:"острів",t:"Пейзажі та погода"},{fr:"la plage",ua:"пляж",t:"Пейзажі та погода"},{fr:"le sable",ua:"пісок",t:"Пейзажі та погода"},{fr:"la chaleur",ua:"тепло, спека",t:"Пейзажі та погода"},{fr:"le ciel",ua:"небо",t:"Пейзажі та погода"},{fr:"le climat",ua:"клімат",t:"Пейзажі та погода"},{fr:"l'orage",ua:"гроза",t:"Пейзажі та погода"},{fr:"la pluie",ua:"дощ",t:"Пейзажі та погода"},{fr:"le soleil",ua:"сонце",t:"Пейзажі та погода"},{fr:"la température",ua:"температура",t:"Пейзажі та погода"},{fr:"le vent",ua:"вітер",t:"Пейзажі та погода"},{fr:"le champ",ua:"поле",t:"Пейзажі та погода"},{fr:"le lac",ua:"озеро",t:"Пейзажі та погода"},{fr:"le sommet",ua:"вершина",t:"Пейзажі та погода"},
+{fr:"le bureau",ua:"письмовий стіл",t:"Меблі та житло"},{fr:"le canapé",ua:"диван",t:"Меблі та житло"},{fr:"la chaise",ua:"стілець",t:"Меблі та житло"},{fr:"l'étagère",ua:"полиця",t:"Меблі та житло"},{fr:"le lit",ua:"ліжко",t:"Меблі та житло"},{fr:"la table",ua:"стіл",t:"Меблі та житло"},{fr:"la lampe",ua:"лампа",t:"Меблі та житло"},{fr:"le rideau",ua:"штора",t:"Меблі та житло"},{fr:"la douche",ua:"душ",t:"Меблі та житло"},{fr:"le four",ua:"духовка",t:"Меблі та житло"},{fr:"le réfrigérateur",ua:"холодильник",t:"Меблі та житло"},
+{fr:"l'appartement",ua:"квартира",t:"Житло та оренда"},{fr:"la maison",ua:"будинок",t:"Житло та оренда"},{fr:"le balcon",ua:"балкон",t:"Житло та оренда"},{fr:"la chambre",ua:"спальня",t:"Житло та оренда"},{fr:"la cuisine",ua:"кухня",t:"Житло та оренда"},{fr:"le salon",ua:"вітальня",t:"Житло та оренда"},{fr:"le jardin",ua:"сад",t:"Житло та оренда"},{fr:"le loyer",ua:"орендна плата",t:"Житло та оренда"},{fr:"le/la propriétaire",ua:"власник",t:"Житло та оренда"},{fr:"le/la locataire",ua:"орендар",t:"Житло та оренда"},
+{fr:"l'avenue",ua:"проспект",t:"Місто"},{fr:"le bâtiment",ua:"будівля",t:"Місто"},{fr:"le magasin",ua:"магазин",t:"Місто"},{fr:"la rue",ua:"вулиця",t:"Місто"},{fr:"animé(e)",ua:"жвавий",t:"Місто"},{fr:"historique",ua:"історичний",t:"Місто"},{fr:"tranquille",ua:"спокійний",t:"Місто"},
+{fr:"chaleureux",ua:"привітний, теплий",t:"Риси характеру"},{fr:"curieux",ua:"допитливий",t:"Риси характеру"},{fr:"doux / douce",ua:"ніжний",t:"Риси характеру"},{fr:"fidèle",ua:"вірний",t:"Риси характеру"},{fr:"honnête",ua:"чесний",t:"Риси характеру"},{fr:"optimiste",ua:"оптимістичний",t:"Риси характеру"},{fr:"prudent(e)",ua:"обережний",t:"Риси характеру"},{fr:"spontané(e)",ua:"спонтанний",t:"Риси характеру"},{fr:"paresseux",ua:"лінивий",t:"Риси характеру"},{fr:"pessimiste",ua:"песимістичний",t:"Риси характеру"},{fr:"têtu(e)",ua:"впертий",t:"Риси характеру"},
+{fr:"les cheveux",ua:"волосся",t:"Зовнішність"},{fr:"le sourire",ua:"усмішка",t:"Зовнішність"},{fr:"jeune",ua:"молодий",t:"Зовнішність"},{fr:"fort(e)",ua:"сильний",t:"Зовнішність"},{fr:"ressembler à",ua:"бути схожим на",t:"Зовнішність"},
+{fr:"la découverte",ua:"відкриття",t:"Наука і техніка"},{fr:"l'innovation",ua:"інновація",t:"Наука і техніка"},{fr:"inventer",ua:"винаходити",t:"Наука і техніка"},{fr:"la technologie",ua:"технологія",t:"Наука і техніка"},{fr:"le robot",ua:"робот",t:"Наука і техніка"},{fr:"l'intelligence artificielle",ua:"штучний інтелект",t:"Наука і техніка"},{fr:"pratique",ua:"зручний",t:"Наука і техніка"},{fr:"utile",ua:"корисний",t:"Наука і техніка"},
+{fr:"le smartphone",ua:"смартфон",t:"Комунікації"},{fr:"le téléphone portable",ua:"мобільний телефон",t:"Комунікації"},{fr:"l'écran",ua:"екран",t:"Комунікації"},{fr:"l'application",ua:"додаток",t:"Комунікації"},{fr:"le réseau social",ua:"соціальна мережа",t:"Комунікації"},{fr:"télécharger",ua:"завантажувати",t:"Комунікації"},{fr:"en ligne",ua:"онлайн",t:"Комунікації"},
+{fr:"le restaurant étoilé",ua:"ресторан з зіркою Мішлен",t:"Ресторан"},{fr:"commander des plats",ua:"замовляти страви",t:"Ресторан"},{fr:"le pourboire",ua:"чайові",t:"Ресторан"},{fr:"le serveur / la serveuse",ua:"офіціант / офіціантка",t:"Ресторан"},{fr:"les crêpes",ua:"млинці",t:"Ресторан"},{fr:"épicé(e)",ua:"гострий",t:"Ресторан"},{fr:"salé(e)",ua:"солоний",t:"Ресторан"},{fr:"sucré(e)",ua:"солодкий",t:"Ресторан"},{fr:"déguster",ua:"дегустувати",t:"Ресторан"},
+{fr:"la carotte",ua:"морква",t:"Продукти"},{fr:"l'oignon",ua:"цибуля",t:"Продукти"},{fr:"le riz",ua:"рис",t:"Продукти"},{fr:"la banane",ua:"банан",t:"Продукти"},{fr:"le saumon",ua:"лосось",t:"Продукти"},{fr:"le poulet",ua:"курятина",t:"Продукти"},{fr:"couper",ua:"різати",t:"Продукти"},{fr:"mélanger",ua:"змішувати",t:"Продукти"},{fr:"préparer",ua:"готувати",t:"Продукти"},
+{fr:"la tête",ua:"голова",t:"Тіло та здоров'я"},{fr:"le dos",ua:"спина",t:"Тіло та здоров'я"},{fr:"la jambe",ua:"нога",t:"Тіло та здоров'я"},{fr:"avoir mal",ua:"відчувати біль",t:"Тіло та здоров'я"},{fr:"la fatigue",ua:"втома",t:"Тіло та здоров'я"},{fr:"le sommeil",ua:"сон",t:"Тіло та здоров'я"},{fr:"se sentir bien",ua:"почуватися добре",t:"Тіло та здоров'я"},
+{fr:"la fièvre",ua:"гарячка",t:"Медицина"},{fr:"le rhume",ua:"застуда",t:"Медицина"},{fr:"le stress",ua:"стрес",t:"Медицина"},{fr:"consulter un médecin",ua:"звернутися до лікаря",t:"Медицина"},{fr:"le traitement",ua:"лікування",t:"Медицина"},{fr:"l'ambulance",ua:"швидка допомога",t:"Медицина"},
+{fr:"écouter des podcasts",ua:"слухати подкасти",t:"Медіа"},{fr:"les fausses nouvelles",ua:"фейкові новини",t:"Медіа"},{fr:"poster des photos",ua:"публікувати фото",t:"Медіа"},{fr:"regarder une vidéo",ua:"дивитися відео",t:"Медіа"},
+{fr:"le/la journaliste",ua:"журналіст",t:"Преса та ТБ"},{fr:"le journal",ua:"газета",t:"Преса та ТБ"},{fr:"la chaîne",ua:"канал (ТБ)",t:"Преса та ТБ"},{fr:"s'abonner",ua:"підписатися",t:"Преса та ТБ"},
+{fr:"créer",ua:"створювати",t:"Ручна робота"},{fr:"en bois",ua:"з дерева",t:"Ручна робота"},{fr:"en plastique",ua:"з пластику",t:"Ручна робота"},{fr:"réparer",ua:"ремонтувати",t:"Ручна робота"},
+{fr:"acheter",ua:"купувати",t:"Споживання"},{fr:"l'argent",ua:"гроші",t:"Споживання"},{fr:"dépenser",ua:"витрачати",t:"Споживання"},{fr:"économiser",ua:"заощаджувати",t:"Споживання"},{fr:"payer",ua:"платити",t:"Споживання"},{fr:"vendre",ua:"продавати",t:"Споживання"},{fr:"cher",ua:"дорогий",t:"Споживання"},{fr:"gratuit",ua:"безкоштовний",t:"Споживання"},{fr:"le prix",ua:"ціна",t:"Споживання"},
+{fr:"l'hôtel",ua:"готель",t:"Подорожі"},{fr:"le départ",ua:"відправлення",t:"Подорожі"},{fr:"la destination",ua:"пункт призначення",t:"Подорожі"},{fr:"l'aéroport",ua:"аеропорт",t:"Подорожі"},{fr:"les bagages",ua:"багаж",t:"Подорожі"},{fr:"le billet",ua:"квиток",t:"Подорожі"},{fr:"le vol",ua:"рейс",t:"Подорожі"},{fr:"le petit déjeuner",ua:"сніданок",t:"Подорожі"},
+{fr:"l'excursion",ua:"екскурсія",t:"Туризм"},{fr:"le/la guide",ua:"гід",t:"Туризм"},{fr:"la fontaine",ua:"фонтан",t:"Туризм"},{fr:"le pont",ua:"міст",t:"Туризм"},{fr:"le volcan",ua:"вулкан",t:"Туризм"},
+{fr:"l'université",ua:"університет",t:"Навчання"},{fr:"apprendre",ua:"вчити",t:"Навчання"},{fr:"le cours",ua:"урок",t:"Навчання"},{fr:"enseigner",ua:"викладати",t:"Навчання"},{fr:"passer un examen",ua:"складати іспит",t:"Навчання"},{fr:"réussir un examen",ua:"скласти іспит",t:"Навчання"},
+{fr:"l'entreprise",ua:"підприємство",t:"Світ праці"},{fr:"le CV",ua:"резюме",t:"Світ праці"},{fr:"l'entretien d'embauche",ua:"співбесіда",t:"Світ праці"},{fr:"la compétence",ua:"компетенція",t:"Світ праці"},{fr:"l'expérience",ua:"досвід",t:"Світ праці"},
+{fr:"la forêt",ua:"ліс",t:"Географія та довкілля"},{fr:"la nature",ua:"природа",t:"Географія та довкілля"},{fr:"l'océan",ua:"океан",t:"Географія та довкілля"},{fr:"la planète",ua:"планета",t:"Географія та довкілля"},{fr:"protéger",ua:"захищати",t:"Географія та довкілля"},{fr:"recycler",ua:"переробляти",t:"Географія та довкілля"},
+{fr:"le chat",ua:"кіт",t:"Тварини"},{fr:"le chien",ua:"собака",t:"Тварини"},{fr:"le cheval",ua:"кінь",t:"Тварини"},{fr:"le poisson",ua:"риба",t:"Тварини"},{fr:"le serpent",ua:"змія",t:"Тварини"},{fr:"le dauphin",ua:"дельфін",t:"Тварини"},{fr:"le tigre",ua:"тигр",t:"Тварини"}
+];
+
+// ========== A1 WORDS ==========
+const V_A1=[
+// Привітання
+{fr:"bonjour",ua:"добрий день",t:"Привітання"},{fr:"bonsoir",ua:"добрий вечір",t:"Привітання"},{fr:"salut",ua:"привіт",t:"Привітання"},{fr:"au revoir",ua:"до побачення",t:"Привітання"},{fr:"merci",ua:"дякую",t:"Привітання"},{fr:"merci beaucoup",ua:"дуже дякую",t:"Привітання"},{fr:"s'il vous plaît",ua:"будь ласка (Ви)",t:"Привітання"},{fr:"s'il te plaît",ua:"будь ласка (ти)",t:"Привітання"},{fr:"excusez-moi",ua:"вибачте",t:"Привітання"},{fr:"pardon",ua:"пробачте",t:"Привітання"},{fr:"oui",ua:"так",t:"Привітання"},{fr:"non",ua:"ні",t:"Привітання"},{fr:"comment allez-vous ?",ua:"як ваші справи?",t:"Привітання"},{fr:"ça va ?",ua:"як справи?",t:"Привітання"},{fr:"je m'appelle…",ua:"мене звати…",t:"Привітання"},{fr:"enchanté(e)",ua:"приємно познайомитись",t:"Привітання"},{fr:"bonne nuit",ua:"на добраніч",t:"Привітання"},{fr:"à bientôt",ua:"до зустрічі",t:"Привітання"},{fr:"à demain",ua:"до завтра",t:"Привітання"},{fr:"bienvenue",ua:"ласкаво просимо",t:"Привітання"},
+// Числа
+{fr:"un",ua:"один",t:"Числа"},{fr:"deux",ua:"два",t:"Числа"},{fr:"trois",ua:"три",t:"Числа"},{fr:"quatre",ua:"чотири",t:"Числа"},{fr:"cinq",ua:"п'ять",t:"Числа"},{fr:"six",ua:"шість",t:"Числа"},{fr:"sept",ua:"сім",t:"Числа"},{fr:"huit",ua:"вісім",t:"Числа"},{fr:"neuf",ua:"дев'ять",t:"Числа"},{fr:"dix",ua:"десять",t:"Числа"},{fr:"onze",ua:"одинадцять",t:"Числа"},{fr:"douze",ua:"дванадцять",t:"Числа"},{fr:"treize",ua:"тринадцять",t:"Числа"},{fr:"quatorze",ua:"чотирнадцять",t:"Числа"},{fr:"quinze",ua:"п'ятнадцять",t:"Числа"},{fr:"seize",ua:"шістнадцять",t:"Числа"},{fr:"vingt",ua:"двадцять",t:"Числа"},{fr:"trente",ua:"тридцять",t:"Числа"},{fr:"quarante",ua:"сорок",t:"Числа"},{fr:"cinquante",ua:"п'ятдесят",t:"Числа"},{fr:"soixante",ua:"шістдесят",t:"Числа"},{fr:"cent",ua:"сто",t:"Числа"},{fr:"mille",ua:"тисяча",t:"Числа"},
+// Кольори
+{fr:"rouge",ua:"червоний",t:"Кольори"},{fr:"bleu(e)",ua:"синій",t:"Кольори"},{fr:"vert(e)",ua:"зелений",t:"Кольори"},{fr:"jaune",ua:"жовтий",t:"Кольори"},{fr:"noir(e)",ua:"чорний",t:"Кольори"},{fr:"blanc / blanche",ua:"білий",t:"Кольори"},{fr:"gris(e)",ua:"сірий",t:"Кольори"},{fr:"rose",ua:"рожевий",t:"Кольори"},{fr:"orange",ua:"помаранчевий",t:"Кольори"},{fr:"violet(te)",ua:"фіолетовий",t:"Кольори"},{fr:"marron",ua:"коричневий",t:"Кольори"},
+// Сім'я
+{fr:"la mère / la maman",ua:"мати / мама",t:"Сім'я"},{fr:"le père / le papa",ua:"батько / тато",t:"Сім'я"},{fr:"le frère",ua:"брат",t:"Сім'я"},{fr:"la sœur",ua:"сестра",t:"Сім'я"},{fr:"le fils",ua:"син",t:"Сім'я"},{fr:"la fille",ua:"дочка",t:"Сім'я"},{fr:"le grand-père",ua:"дідусь",t:"Сім'я"},{fr:"la grand-mère",ua:"бабуся",t:"Сім'я"},{fr:"l'oncle",ua:"дядько",t:"Сім'я"},{fr:"la tante",ua:"тітка",t:"Сім'я"},{fr:"le cousin / la cousine",ua:"двоюрідний брат / сестра",t:"Сім'я"},{fr:"les parents",ua:"батьки",t:"Сім'я"},{fr:"les enfants",ua:"діти",t:"Сім'я"},{fr:"le bébé",ua:"немовля",t:"Сім'я"},
+// Їжа і напої
+{fr:"le pain",ua:"хліб",t:"Їжа і напої"},{fr:"le fromage",ua:"сир",t:"Їжа і напої"},{fr:"le beurre",ua:"масло",t:"Їжа і напої"},{fr:"le lait",ua:"молоко",t:"Їжа і напої"},{fr:"l'eau",ua:"вода",t:"Їжа і напої"},{fr:"le café",ua:"кава",t:"Їжа і напої"},{fr:"le thé",ua:"чай",t:"Їжа і напої"},{fr:"le jus",ua:"сік",t:"Їжа і напої"},{fr:"la viande",ua:"м'ясо",t:"Їжа і напої"},{fr:"le poisson",ua:"риба",t:"Їжа і напої"},{fr:"le légume",ua:"овоч",t:"Їжа і напої"},{fr:"le fruit",ua:"фрукт",t:"Їжа і напої"},{fr:"la pomme",ua:"яблуко",t:"Їжа і напої"},{fr:"la tomate",ua:"помідор",t:"Їжа і напої"},{fr:"le chocolat",ua:"шоколад",t:"Їжа і напої"},{fr:"le gâteau",ua:"торт",t:"Їжа і напої"},{fr:"la soupe",ua:"суп",t:"Їжа і напої"},{fr:"le vin",ua:"вино",t:"Їжа і напої"},{fr:"la bière",ua:"пиво",t:"Їжа і напої"},{fr:"le sucre",ua:"цукор",t:"Їжа і напої"},{fr:"le sel",ua:"сіль",t:"Їжа і напої"},{fr:"l'œuf",ua:"яйце",t:"Їжа і напої"},
+// Одяг
+{fr:"la chemise",ua:"сорочка",t:"Одяг"},{fr:"le pantalon",ua:"штани",t:"Одяг"},{fr:"la jupe",ua:"спідниця",t:"Одяг"},{fr:"la robe",ua:"сукня",t:"Одяг"},{fr:"le manteau",ua:"пальто",t:"Одяг"},{fr:"la veste",ua:"куртка",t:"Одяг"},{fr:"les chaussures",ua:"взуття",t:"Одяг"},{fr:"les chaussettes",ua:"шкарпетки",t:"Одяг"},{fr:"le chapeau",ua:"капелюх",t:"Одяг"},{fr:"l'écharpe",ua:"шарф",t:"Одяг"},{fr:"le pull",ua:"светр",t:"Одяг"},{fr:"le tee-shirt",ua:"футболка",t:"Одяг"},{fr:"les lunettes",ua:"окуляри",t:"Одяг"},{fr:"le sac",ua:"сумка",t:"Одяг"},
+// Транспорт
+{fr:"le bus",ua:"автобус",t:"Транспорт"},{fr:"le métro",ua:"метро",t:"Транспорт"},{fr:"le train",ua:"потяг",t:"Транспорт"},{fr:"l'avion",ua:"літак",t:"Транспорт"},{fr:"la voiture",ua:"автомобіль",t:"Транспорт"},{fr:"le taxi",ua:"таксі",t:"Транспорт"},{fr:"le vélo",ua:"велосипед",t:"Транспорт"},{fr:"le bateau",ua:"човен, корабель",t:"Транспорт"},{fr:"la gare",ua:"вокзал",t:"Транспорт"},{fr:"l'arrêt de bus",ua:"автобусна зупинка",t:"Транспорт"},{fr:"la station de métro",ua:"станція метро",t:"Транспорт"},{fr:"le permis de conduire",ua:"водійські права",t:"Транспорт"},
+// Професії
+{fr:"le médecin",ua:"лікар",t:"Професії"},{fr:"le professeur",ua:"вчитель",t:"Професії"},{fr:"l'avocat(e)",ua:"адвокат",t:"Професії"},{fr:"le boulanger / la boulangère",ua:"пекар",t:"Професії"},{fr:"le cuisinier / la cuisinière",ua:"кухар",t:"Професії"},{fr:"le policier / la policière",ua:"поліцейський",t:"Професії"},{fr:"l'infirmier / l'infirmière",ua:"медбрат / медсестра",t:"Професії"},{fr:"le vendeur / la vendeuse",ua:"продавець",t:"Професії"},{fr:"le serveur / la serveuse",ua:"офіціант",t:"Професії"},{fr:"l'ingénieur(e)",ua:"інженер",t:"Професії"},{fr:"le dentiste",ua:"стоматолог",t:"Професії"},{fr:"le pharmacien / la pharmacienne",ua:"фармацевт",t:"Професії"},
+// Дім
+{fr:"la maison",ua:"будинок",t:"Дім"},{fr:"la chambre",ua:"кімната",t:"Дім"},{fr:"la cuisine",ua:"кухня",t:"Дім"},{fr:"la salle de bain",ua:"ванна кімната",t:"Дім"},{fr:"le salon",ua:"вітальня",t:"Дім"},{fr:"la porte",ua:"двері",t:"Дім"},{fr:"la fenêtre",ua:"вікно",t:"Дім"},{fr:"le mur",ua:"стіна",t:"Дім"},{fr:"le sol",ua:"підлога",t:"Дім"},{fr:"le toit",ua:"дах",t:"Дім"},{fr:"l'escalier",ua:"сходи",t:"Дім"},{fr:"la clé",ua:"ключ",t:"Дім"},
+// Школа
+{fr:"l'école",ua:"школа",t:"Школа"},{fr:"le livre",ua:"книга",t:"Школа"},{fr:"le cahier",ua:"зошит",t:"Школа"},{fr:"le stylo",ua:"ручка",t:"Школа"},{fr:"le crayon",ua:"олівець",t:"Школа"},{fr:"la gomme",ua:"гумка",t:"Школа"},{fr:"le tableau",ua:"дошка",t:"Школа"},{fr:"la classe",ua:"клас",t:"Школа"},{fr:"le devoir",ua:"домашнє завдання",t:"Школа"},{fr:"la règle",ua:"лінійка",t:"Школа"},{fr:"le sac à dos",ua:"рюкзак",t:"Школа"},{fr:"la récréation",ua:"перерва",t:"Школа"},
+// Тіло
+{fr:"la tête",ua:"голова",t:"Тіло"},{fr:"les yeux",ua:"очі",t:"Тіло"},{fr:"le nez",ua:"ніс",t:"Тіло"},{fr:"la bouche",ua:"рот",t:"Тіло"},{fr:"l'oreille",ua:"вухо",t:"Тіло"},{fr:"le bras",ua:"рука",t:"Тіло"},{fr:"la main",ua:"кисть руки",t:"Тіло"},{fr:"le doigt",ua:"палець",t:"Тіло"},{fr:"la jambe",ua:"нога",t:"Тіло"},{fr:"le pied",ua:"ступня",t:"Тіло"},{fr:"le ventre",ua:"живіт",t:"Тіло"},{fr:"le cœur",ua:"серце",t:"Тіло"},
+// Дієслова
+{fr:"être",ua:"бути",t:"Дієслова"},{fr:"avoir",ua:"мати",t:"Дієслова"},{fr:"faire",ua:"робити",t:"Дієслова"},{fr:"aller",ua:"йти, їхати",t:"Дієслова"},{fr:"venir",ua:"приходити",t:"Дієслова"},{fr:"manger",ua:"їсти",t:"Дієслова"},{fr:"boire",ua:"пити",t:"Дієслова"},{fr:"dormir",ua:"спати",t:"Дієслова"},{fr:"parler",ua:"говорити",t:"Дієслова"},{fr:"écouter",ua:"слухати",t:"Дієслова"},{fr:"lire",ua:"читати",t:"Дієслова"},{fr:"écrire",ua:"писати",t:"Дієслова"},{fr:"regarder",ua:"дивитися",t:"Дієслова"},{fr:"comprendre",ua:"розуміти",t:"Дієслова"},{fr:"aimer",ua:"любити",t:"Дієслова"},{fr:"détester",ua:"ненавидіти",t:"Дієслова"},{fr:"préférer",ua:"надавати перевагу",t:"Дієслова"},{fr:"travailler",ua:"працювати",t:"Дієслова"},{fr:"habiter",ua:"мешкати",t:"Дієслова"},{fr:"acheter",ua:"купувати",t:"Дієслова"},{fr:"vouloir",ua:"хотіти",t:"Дієслова"},{fr:"pouvoir",ua:"могти",t:"Дієслова"},{fr:"devoir",ua:"повинен",t:"Дієслова"},{fr:"savoir",ua:"знати",t:"Дієслова"},
+// Прикметники
+{fr:"grand(e)",ua:"великий",t:"Прикметники"},{fr:"petit(e)",ua:"маленький",t:"Прикметники"},{fr:"bon(ne)",ua:"гарний, добрий",t:"Прикметники"},{fr:"mauvais(e)",ua:"поганий",t:"Прикметники"},{fr:"beau / belle",ua:"красивий",t:"Прикметники"},{fr:"nouveau / nouvelle",ua:"новий",t:"Прикметники"},{fr:"vieux / vieille",ua:"старий",t:"Прикметники"},{fr:"chaud(e)",ua:"гарячий",t:"Прикметники"},{fr:"froid(e)",ua:"холодний",t:"Прикметники"},{fr:"facile",ua:"легкий",t:"Прикметники"},{fr:"difficile",ua:"складний",t:"Прикметники"},{fr:"content(e)",ua:"задоволений",t:"Прикметники"},{fr:"fatigué(e)",ua:"втомлений",t:"Прикметники"},{fr:"rapide",ua:"швидкий",t:"Прикметники"},{fr:"lent(e)",ua:"повільний",t:"Прикметники"},
+// Повсякдення
+{fr:"la journée",ua:"день",t:"Повсякдення"},{fr:"le matin",ua:"ранок",t:"Повсякдення"},{fr:"l'après-midi",ua:"після обіду",t:"Повсякдення"},{fr:"le soir",ua:"вечір",t:"Повсякдення"},{fr:"la nuit",ua:"ніч",t:"Повсякдення"},{fr:"aujourd'hui",ua:"сьогодні",t:"Повсякдення"},{fr:"demain",ua:"завтра",t:"Повсякдення"},{fr:"hier",ua:"вчора",t:"Повсякдення"},{fr:"maintenant",ua:"зараз",t:"Повсякдення"},{fr:"toujours",ua:"завжди",t:"Повсякдення"},{fr:"souvent",ua:"часто",t:"Повсякдення"},{fr:"parfois",ua:"іноді",t:"Повсякдення"},{fr:"jamais",ua:"ніколи",t:"Повсякдення"},{fr:"ici",ua:"тут",t:"Повсякдення"},{fr:"là-bas",ua:"там",t:"Повсякдення"},{fr:"à gauche",ua:"ліворуч",t:"Повсякдення"},{fr:"à droite",ua:"праворуч",t:"Повсякдення"},{fr:"tout droit",ua:"прямо",t:"Повсякдення"}
+];
+
+// ========== DATE/TIME DATA ==========
+const DAYS=[
+{fr:"lundi",ua:"понеділок"},{fr:"mardi",ua:"вівторок"},{fr:"mercredi",ua:"середа"},{fr:"jeudi",ua:"четвер"},{fr:"vendredi",ua:"п'ятниця"},{fr:"samedi",ua:"субота"},{fr:"dimanche",ua:"неділя"}
+];
+const MONTHS=[
+{fr:"janvier",ua:"січень",n:1},{fr:"février",ua:"лютий",n:2},{fr:"mars",ua:"березень",n:3},{fr:"avril",ua:"квітень",n:4},{fr:"mai",ua:"травень",n:5},{fr:"juin",ua:"червень",n:6},{fr:"juillet",ua:"липень",n:7},{fr:"août",ua:"серпень",n:8},{fr:"septembre",ua:"вересень",n:9},{fr:"octobre",ua:"жовтень",n:10},{fr:"novembre",ua:"листопад",n:11},{fr:"décembre",ua:"грудень",n:12}
+];
+const SEASONS=[
+{fr:"le printemps",ua:"весна"},{fr:"l'été",ua:"літо"},{fr:"l'automne",ua:"осінь"},{fr:"l'hiver",ua:"зима"}
+];
+const TIME_WORDS=[
+{fr:"il est une heure",ua:"перша година"},{fr:"il est deux heures",ua:"друга година"},{fr:"il est midi",ua:"полудень"},{fr:"il est minuit",ua:"опівніч"},{fr:"et quart",ua:"і чверть (15 хв)"},{fr:"et demie",ua:"і половина (30 хв)"},{fr:"moins le quart",ua:"без чверті"},{fr:"il est quelle heure ?",ua:"котра година?"},{fr:"à quelle heure ?",ua:"о котрій годині?"},{fr:"du matin",ua:"ранку"},{fr:"de l'après-midi",ua:"дня"},{fr:"du soir",ua:"вечора"}
+];
+const DT_EXPRESSIONS=[
+{fr:"Quel jour sommes-nous ?",ua:"Який сьогодні день?"},{fr:"Quelle est la date ?",ua:"Яке сьогодні число?"},{fr:"Nous sommes le…",ua:"Сьогодні…"},{fr:"Mon anniversaire est le…",ua:"Мій день народження…"},{fr:"en janvier / en février…",ua:"у січні / лютому…"},{fr:"au printemps / en été",ua:"навесні / влітку"},{fr:"en automne / en hiver",ua:"восени / взимку"},{fr:"le premier janvier",ua:"перше січня"},{fr:"le deux mars",ua:"друге березня"}
+];
+
+// ========== GLOBAL STATE ==========
+let currentLevel='A2';
+let V, TM, AT;
+let CT='all',CM='all',CC=[],CI=0,KN=new Set(),UN=new Set(),FL=false,RV=false;
+let QM='fr2ua',QC=[],QI=0,QK=0;
+let TC=[],TI=0,TK=0;
+let MS=null,MP=0,MT=0;
+let _qTimerID=null;
+
+// DT state
+let clockScore=0,clockTotal=0,clockAnswered=false;
+let dateScore=0,dateTotal=0,dateIdx=0,dateQuestions=[];
+let dtqScore=0,dtqTotal=0,dtqIdx=0,dtqQuestions=[];
+
+function sh(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+// ========== LEVEL SWITCHING ==========
+function switchLevel(lvl, el){
+  document.querySelectorAll('.level-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  
+  if(lvl==='DT'){
+    document.getElementById('flashcardsSection').style.display='none';
+    document.getElementById('dateTimeSection').style.display='block';
+    document.getElementById('mainTitle').innerHTML='🗼Français <span>A1–A2</span> → Українська';
+    document.getElementById('mainSub').textContent='La date, l\'heure, les mois — Дата, час, місяці';
+    initDT();
+    return;
+  }
+  
+  document.getElementById('flashcardsSection').style.display='block';
+  document.getElementById('dateTimeSection').style.display='none';
+  currentLevel=lvl;
+  
+  if(lvl==='A1'){
+    V=V_A1; TM=TM_A1;
+    document.getElementById('mainTitle').innerHTML='🗼Français <span>A1</span> → Українська';
+    document.getElementById('mainSub').textContent='Les premiers mots — Перші слова';
+  } else {
+    V=V_A2; TM=TM_A2;
+    document.getElementById('mainTitle').innerHTML='🗼Français <span>A2</span> → Українська';
+    document.getElementById('mainSub').textContent='Les mots de Paris — Слова з Парижу';
+  }
+  
+  AT=[...new Set(V.map(w=>w.t))];
+  KN=new Set(); UN=new Set();
+  CT='all'; CI=0;
+  init();
+}
+
+function gC(){return CT==='all'?[...V]:V.filter(w=>w.t===CT)}
+
+function init(){
+  const b=document.getElementById('tBar');
+  b.innerHTML='<button class="tb active" onclick="sT(\'all\',this)">✧ Усі</button>';
+  AT.forEach(t=>{const m=TM[t];b.innerHTML+='<button class="tb" onclick="sT(\''+t.replace(/'/g,"\\'")+'\',this)">'+(m?m.f.substring(0,18):t)+'</button>'});
+  fC();rC();uS();
+  document.getElementById('tC').textContent=V.length;
+  document.getElementById('tC2').textContent=V.length;
+  uTH();
+}
+
+function sT(t,el){CT=t;document.querySelectorAll('.tb').forEach(b=>b.classList.remove('active'));el.classList.add('active');CI=0;uTH();fC();rC();uS();
+if(document.getElementById('sQuiz').classList.contains('active'))stQ();
+if(document.getElementById('sType').classList.contains('active'))stTy();
+if(document.getElementById('sMatch').classList.contains('active'))stMa()}
+
+function uTH(){
+  if(CT==='all'){
+    document.getElementById('uB').textContent=currentLevel==='A1'?'THÈME 1–14':'UNITÉ 1–12';
+    document.getElementById('fN').textContent='Tous les thèmes';
+    document.getElementById('uN').innerHTML='Усі теми — '+gC().length+' слів';
+  } else {
+    const m=TM[CT]||{f:CT,u:'—'};
+    document.getElementById('uB').textContent=m.u.toUpperCase();
+    document.getElementById('fN').textContent=m.f;
+    document.getElementById('uN').innerHTML=CT+' — '+gC().length+' слів';
+  }
+}
+
+function sw(s){document.querySelectorAll('.scr').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));const id='s'+s.charAt(0).toUpperCase()+s.slice(1);document.getElementById(id).classList.add('active');event.target.closest('.nav-btn').classList.add('active');if(s==='quiz')stQ();if(s==='type')stTy();if(s==='match')stMa()}
+
+// ===== CARDS =====
+function fC(){let c=gC();if(CM==='unknown')c=c.filter(w=>UN.has(w.fr));if(CM==='shuffle'||CM==='reverse')c=sh([...c]);CC=c;RV=CM==='reverse';document.getElementById('rCards').classList.remove('vis')}
+function rC(){if(!CC.length){document.getElementById('fW').textContent='Немає карток';document.getElementById('bW').textContent='—';document.getElementById('cN').textContent='0';document.getElementById('tN').textContent='0';return}const c=CC[CI];document.getElementById('fW').textContent=RV?c.ua:c.fr;document.getElementById('bW').textContent=RV?c.fr:c.ua;document.getElementById('fL').textContent=RV?'Українська':'Français';document.getElementById('bL').textContent=RV?'Français':'Українська';document.getElementById('bCt').textContent=c.t;document.getElementById('cN').textContent=CI+1;document.getElementById('tN').textContent=CC.length;FL=false;document.getElementById('cI').classList.remove('flipped');document.getElementById('pF').style.width=((CI+1)/CC.length)*100+'%'}
+function fl(){FL=!FL;document.getElementById('cI').classList.toggle('flipped')}
+function nx(){if(!CC.length||CI>=CC.length-1)return;const c=document.getElementById('cBox');c.classList.add('ao');setTimeout(()=>{c.classList.remove('ao');CI++;rC();c.classList.add('ai');setTimeout(()=>c.classList.remove('ai'),300)},200)}
+function pv(){if(CI>0){CI--;rC()}}
+function mk(ok){if(!CC.length)return;const c=CC[CI];if(ok){KN.add(c.fr);UN.delete(c.fr)}else{UN.add(c.fr);KN.delete(c.fr)}uS();if(CI<CC.length-1)nx();else{const tc=gC(),k=tc.filter(w=>KN.has(w.fr)).length;document.getElementById('rSc').textContent=Math.round(k/tc.length*100)+'%';document.getElementById('rCards').classList.add('vis')}}
+function uS(){const tc=gC();document.getElementById('kC').textContent=tc.filter(w=>KN.has(w.fr)).length;document.getElementById('uC').textContent=tc.filter(w=>UN.has(w.fr)).length}
+function re(){CI=0;fC();rC();uS()}
+function reU(){CM='unknown';CI=0;fC();rC();uS()}
+function sM(m,el){CM=m;document.querySelectorAll('#sCards .mbtn').forEach(b=>b.classList.remove('active'));el.classList.add('active');CI=0;fC();rC();uS()}
+document.getElementById('cBox').addEventListener('click',fl);
+document.addEventListener('keydown',e=>{if(!document.getElementById('sCards').classList.contains('active'))return;if(e.key===' '||e.key==='Enter'){e.preventDefault();fl()}if(e.key==='ArrowRight')nx();if(e.key==='ArrowLeft')pv();if(e.key==='ArrowUp')mk(1);if(e.key==='ArrowDown')mk(0)});
+let tx=0;document.getElementById('cArea').addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+document.getElementById('cArea').addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>60){d<0?nx():pv()}},{passive:true});
+
+// ===== QUIZ =====
+function spkQ(){if(QC[QI])spk(QC[QI].fr)}
+function stQ(){QC=sh([...gC()]).slice(0,20);QI=0;QK=0;document.getElementById('rQuiz').classList.remove('vis');rQ()}
+function startQTimer(){clearInterval(_qTimerID);let left=100;document.getElementById('qTimer').style.width='100%';_qTimerID=setInterval(()=>{left-=1;document.getElementById('qTimer').style.width=left+'%';if(left<=0){clearInterval(_qTimerID);qTimeUp()}},100)}
+function stopQTimer(){clearInterval(_qTimerID)}
+function qTimeUp(){const c=QC[QI];const isUA=QM==='fr2ua'||QM==='audio';const cor=isUA?c.ua:c.fr;document.querySelectorAll('.qob').forEach(b=>{b.classList.add('dis');if(b.textContent.slice(1)===cor)b.classList.add('ok')});document.getElementById('qN').style.display='block';spk(c.fr)}
+function sQM(m,el){QM=m;document.querySelectorAll('#sQuiz .mbtn').forEach(b=>b.classList.remove('active'));el.classList.add('active');stQ()}
+function rQ(){if(QI>=QC.length){stopQTimer();document.getElementById('rQS').textContent=Math.round(QK/QC.length*100)+'%';document.getElementById('rQL').textContent=QK+' з '+QC.length;document.getElementById('rQuiz').classList.add('vis');return}const c=QC[QI];document.getElementById('qS').textContent=QK;document.getElementById('qT').textContent=QC.length;document.getElementById('qP').style.width=(QI/QC.length)*100+'%';document.getElementById('qN').style.display='none';if(QM==='audio'){document.getElementById('qL').textContent='Що ви чуєте? 🔊';document.getElementById('qW').textContent='???';document.getElementById('qA').style.display='flex';setTimeout(()=>spk(c.fr),300)}else if(QM==='ua2fr'){document.getElementById('qL').textContent='Як буде французькою?';document.getElementById('qW').textContent=c.ua;document.getElementById('qA').style.display='none'}else{document.getElementById('qL').textContent='Як перекласти?';document.getElementById('qW').textContent=c.fr;document.getElementById('qA').style.display='flex'}const isUA=QM==='fr2ua'||QM==='audio';const cor=isUA?c.ua:c.fr;let op=[cor];const sameTopic=V.filter(w=>w.t===c.t&&w.fr!==c.fr);const otherWords=V.filter(w=>w.t!==c.t&&w.fr!==c.fr);const pool=[...sh([...sameTopic]),...sh([...otherWords])];while(op.length<4&&pool.length){const r=pool.shift();const v=isUA?r.ua:r.fr;if(!op.includes(v))op.push(v)}op=sh(op);const L=['A','B','C','D'];document.getElementById('qO').innerHTML=op.map((o,i)=>'<button class="qob" onclick="aQ(this,'+i+',\''+encodeURIComponent(cor)+'\')"><span class="ol">'+L[i]+'</span>'+o+'</button>').join('');startQTimer()}
+function aQ(el,i,ecor){stopQTimer();const cor=decodeURIComponent(ecor);document.querySelectorAll('.qob').forEach(b=>{b.classList.add('dis');if(b.textContent.slice(1)===cor)b.classList.add('ok')});if(el.textContent.slice(1)===cor){el.classList.add('ok');QK++}else el.classList.add('no');document.getElementById('qS').textContent=QK;document.getElementById('qN').style.display='block';spk(QC[QI].fr)}
+function nxQ(){QI++;rQ()}
+
+// ===== TYPE =====
+function spkTy(){if(TC[TI])spk(TC[TI].fr)}
+function stTy(){TC=sh([...gC()]).slice(0,15);TI=0;TK=0;document.getElementById('rType').classList.remove('vis');rTy()}
+function rTy(){if(TI>=TC.length){document.getElementById('rTS').textContent=Math.round(TK/TC.length*100)+'%';document.getElementById('rType').classList.add('vis');return}const c=TC[TI];document.getElementById('tyS').textContent=TK;document.getElementById('tyT').textContent=TC.length;document.getElementById('tyP').style.width=(TI/TC.length)*100+'%';document.getElementById('tyL').textContent='Напишіть французькою:';document.getElementById('tyW').textContent=c.ua;document.getElementById('tyH').textContent='('+c.fr.length+' літер)';document.getElementById('tyI').value='';document.getElementById('tyI').className='ti';document.getElementById('tyF').textContent='';document.getElementById('tyF').className='tf';document.getElementById('tyN').style.display='none';document.getElementById('tyI').focus()}
+function chTy(){const c=TC[TI];const a=document.getElementById('tyI').value.trim().toLowerCase();const cr=c.fr.toLowerCase().replace(/[()]/g,'').trim();const al=cr.split('/').map(s=>s.trim());const ok=al.some(x=>a===x||a===x.replace(/^(le |la |l'|les |un |une )/,''));const inp=document.getElementById('tyI');const fb=document.getElementById('tyF');if(ok){inp.className='ti ok';fb.className='tf tok';fb.textContent='✓ Правильно!';TK++;spk(c.fr)}else{inp.className='ti no';fb.className='tf tno';fb.innerHTML='✗ Відповідь: <strong>'+c.fr+'</strong>';spk(c.fr)}document.getElementById('tyS').textContent=TK;document.getElementById('tyN').style.display='block'}
+function nxTy(){TI++;rTy()}
+document.getElementById('tyI').addEventListener('keydown',e=>{if(e.key==='Enter')chTy()});
+
+// ===== MATCH =====
+function stMa(){const cd=sh([...gC()]).slice(0,8);MP=0;MT=cd.length;MS=null;document.getElementById('mF').textContent=0;document.getElementById('mT').textContent=MT;document.getElementById('mP').style.width='0%';document.getElementById('rMatch').classList.remove('vis');let it=[];cd.forEach((c,i)=>{it.push({id:i,text:c.fr,type:'fr',pair:i});it.push({id:i,text:c.ua,type:'ua',pair:i})});it=sh(it);document.getElementById('mG').innerHTML=it.map(x=>'<button class="mc" data-pair="'+x.pair+'" data-type="'+x.type+'" onclick="mCl(this)">'+x.text+'</button>').join('')}
+function mCl(el){if(el.classList.contains('mat'))return;if(MS){if(MS===el){MS.classList.remove('sel');MS=null;return}if(MS.dataset.type===el.dataset.type){MS.classList.remove('sel');MS=el;el.classList.add('sel');return}if(MS.dataset.pair===el.dataset.pair){MS.classList.remove('sel');MS.classList.add('mat');el.classList.add('mat');MP++;MS=null;document.getElementById('mF').textContent=MP;document.getElementById('mP').style.width=(MP/MT)*100+'%';const frEl=[...document.querySelectorAll('.mc.mat')].find(x=>x.dataset.pair===el.dataset.pair&&x.dataset.type==='fr');if(frEl)spk(frEl.textContent);if(MP===MT)setTimeout(()=>document.getElementById('rMatch').classList.add('vis'),600)}else{el.classList.add('wf');MS.classList.add('wf');const p=MS;setTimeout(()=>{el.classList.remove('wf');p.classList.remove('wf');p.classList.remove('sel')},500);MS=null}}else{MS=el;el.classList.add('sel')}}
+
+// ========== DATE/TIME MODULE ==========
+function initDT(){
+  // Days
+  document.getElementById('dtDaysGrid').innerHTML=DAYS.map(d=>'<div class="dt-item" onclick="spk(\''+d.fr+'\')"><div class="fr">'+d.fr+'</div><div class="ua">'+d.ua+'</div></div>').join('');
+  // Months
+  document.getElementById('dtMonthsGrid').innerHTML=MONTHS.map(m=>'<div class="dt-item" onclick="spk(\''+m.fr+'\')"><div class="fr">'+m.fr+'</div><div class="ua">'+m.ua+'</div></div>').join('');
+  // Seasons
+  document.getElementById('dtSeasonsGrid').innerHTML=SEASONS.map(s=>'<div class="dt-item" onclick="spk(\''+s.fr+'\')"><div class="fr">'+s.fr+'</div><div class="ua">'+s.ua+'</div></div>').join('');
+  // Time words
+  document.getElementById('dtTimeGrid').innerHTML=TIME_WORDS.map(t=>'<div class="dt-item" onclick="spk(\''+t.fr.replace(/'/g,"\\'")+'\')"><div class="fr">'+t.fr+'</div><div class="ua">'+t.ua+'</div></div>').join('');
+  // Expressions
+  document.getElementById('dtExpGrid').innerHTML=DT_EXPRESSIONS.map(e=>'<div class="dt-item" onclick="spk(\''+e.fr.replace(/'/g,"\\'")+'\')"><div class="fr">'+e.fr+'</div><div class="ua">'+e.ua+'</div></div>').join('');
+  
+  startDaysOrder();
+  startMonthsOrder();
+  generateClock();
+  generateDateExercise();
+  generateDtQuiz();
+}
+
+function dtSwitch(sec,el){
+  document.querySelectorAll('.dt-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.dt-sub').forEach(s=>s.style.display='none');
+  const map={learn:'dtLearn',clock:'dtClock',days:'dtDays',months:'dtMonths',dates:'dtDates',quiz:'dtQuizSec'};
+  document.getElementById(map[sec]).style.display='block';
+  if(sec==='clock')generateClock();
+  if(sec==='days')startDaysOrder();
+  if(sec==='months')startMonthsOrder();
+  if(sec==='dates')generateDateExercise();
+  if(sec==='quiz')generateDtQuiz();
+}
+
+// ===== CLOCK EXERCISE =====
+function generateClock(){
+  clockAnswered=false;
+  const hours=[1,2,3,4,5,6,7,8,9,10,11,12];
+  const mins=[0,15,30,45];
+  const h=hours[Math.floor(Math.random()*hours.length)];
+  const m=mins[Math.floor(Math.random()*mins.length)];
+  
+  // Draw clock numbers
+  const numG=document.getElementById('clockNumbers');
+  numG.innerHTML='';
+  for(let i=1;i<=12;i++){
+    const angle=(i*30-90)*Math.PI/180;
+    const x=100+70*Math.cos(angle);
+    const y=100+70*Math.sin(angle);
+    numG.innerHTML+='<text x="'+x+'" y="'+(y+5)+'" text-anchor="middle" class="clock-num">'+i+'</text>';
+  }
+  
+  // Draw hands
+  const hAngle=((h%12)+m/60)*30-90;
+  const mAngle=m*6-90;
+  const hRad=hAngle*Math.PI/180;
+  const mRad=mAngle*Math.PI/180;
+  document.getElementById('clockHour').setAttribute('x2',100+40*Math.cos(hRad));
+  document.getElementById('clockHour').setAttribute('y2',100+40*Math.sin(hRad));
+  document.getElementById('clockMinute').setAttribute('x2',100+55*Math.cos(mRad));
+  document.getElementById('clockMinute').setAttribute('y2',100+55*Math.sin(mRad));
+  
+  // Generate correct answer
+  let correct;
+  if(m===0) correct='Il est '+frHour(h);
+  else if(m===15) correct='Il est '+frHour(h)+' et quart';
+  else if(m===30) correct='Il est '+frHour(h)+' et demie';
+  else correct='Il est '+frHour(h+1)+' moins le quart';
+  
+  // Generate options
+  let opts=[correct];
+  while(opts.length<4){
+    const rh=hours[Math.floor(Math.random()*hours.length)];
+    const rm=mins[Math.floor(Math.random()*mins.length)];
+    let o;
+    if(rm===0) o='Il est '+frHour(rh);
+    else if(rm===15) o='Il est '+frHour(rh)+' et quart';
+    else if(rm===30) o='Il est '+frHour(rh)+' et demie';
+    else o='Il est '+frHour(rh+1)+' moins le quart';
+    if(!opts.includes(o)) opts.push(o);
+  }
+  opts=sh(opts);
+  
+  document.getElementById('clockOpts').innerHTML=opts.map(o=>'<button class="ex-opt" onclick="checkClock(this,\''+encodeURIComponent(correct)+'\')">'+o+'</button>').join('');
+  document.getElementById('clockNext').style.display='none';
+  document.getElementById('clockScore').textContent='Рахунок: '+clockScore+' / '+clockTotal;
+}
+
+function frHour(h){
+  h=((h-1)%12)+1;
+  const nums=['','une heure','deux heures','trois heures','quatre heures','cinq heures','six heures','sept heures','huit heures','neuf heures','dix heures','onze heures','midi'];
+  return nums[h];
+}
+
+function checkClock(el,ecor){
+  if(clockAnswered) return;
+  clockAnswered=true;
+  clockTotal++;
+  const cor=decodeURIComponent(ecor);
+  document.querySelectorAll('.ex-opt').forEach(b=>{b.classList.add('dis');if(b.textContent===cor)b.classList.add('ok')});
+  if(el.textContent===cor){el.classList.add('ok');clockScore++}else el.classList.add('no');
+  document.getElementById('clockScore').textContent='Рахунок: '+clockScore+' / '+clockTotal;
+  document.getElementById('clockNext').style.display='block';
+  spk(cor);
+}
+function nextClock(){generateClock()}
+
+// ===== DAYS ORDER =====
+function startDaysOrder(){
+  const shuffled=sh([...DAYS]);
+  const list=document.getElementById('daysOrder');
+  list.innerHTML=shuffled.map((d,i)=>'<div class="order-item" draggable="true" data-fr="'+d.fr+'"><span class="num">'+(i+1)+'</span>'+d.fr+' — '+d.ua+'</div>').join('');
+  document.getElementById('daysResult').textContent='';
+  enableDragSort(list);
+}
+function checkDaysOrder(){
+  const items=[...document.querySelectorAll('#daysOrder .order-item')];
+  let correct=0;
+  items.forEach((el,i)=>{
+    if(el.dataset.fr===DAYS[i].fr){el.classList.remove('wrong');el.classList.add('correct');correct++}
+    else{el.classList.remove('correct');el.classList.add('wrong')}
+    el.querySelector('.num').textContent=i+1;
+  });
+  document.getElementById('daysResult').textContent=correct===7?'🎉 Бездоганно! Усі дні на місці!':'✓ Правильно: '+correct+' з 7';
+}
+
+// ===== MONTHS ORDER =====
+function startMonthsOrder(){
+  const shuffled=sh([...MONTHS]);
+  const list=document.getElementById('monthsOrder');
+  list.innerHTML=shuffled.map((m,i)=>'<div class="order-item" draggable="true" data-fr="'+m.fr+'"><span class="num">'+(i+1)+'</span>'+m.fr+' — '+m.ua+'</div>').join('');
+  document.getElementById('monthsResult').textContent='';
+  enableDragSort(list);
+}
+function checkMonthsOrder(){
+  const items=[...document.querySelectorAll('#monthsOrder .order-item')];
+  let correct=0;
+  items.forEach((el,i)=>{
+    if(el.dataset.fr===MONTHS[i].fr){el.classList.remove('wrong');el.classList.add('correct');correct++}
+    else{el.classList.remove('correct');el.classList.add('wrong')}
+    el.querySelector('.num').textContent=i+1;
+  });
+  document.getElementById('monthsResult').textContent=correct===12?'🎉 Magnifique! Усі місяці правильно!':'✓ Правильно: '+correct+' з 12';
+}
+
+// ===== DRAG SORT =====
+function enableDragSort(list){
+  let dragEl=null;
+  list.addEventListener('dragstart',e=>{dragEl=e.target.closest('.order-item');if(dragEl)e.dataTransfer.effectAllowed='move'});
+  list.addEventListener('dragover',e=>{e.preventDefault();const target=e.target.closest('.order-item');if(target&&target!==dragEl){const rect=target.getBoundingClientRect();const mid=rect.top+rect.height/2;if(e.clientY<mid)list.insertBefore(dragEl,target);else list.insertBefore(dragEl,target.nextSibling)}});
+  list.addEventListener('dragend',()=>{[...list.querySelectorAll('.order-item')].forEach((el,i)=>el.querySelector('.num').textContent=i+1)});
+  
+  // Touch support
+  let touchEl=null,touchClone=null;
+  list.addEventListener('touchstart',e=>{
+    touchEl=e.target.closest('.order-item');
+    if(!touchEl)return;
+    touchEl.style.opacity='0.5';
+  },{passive:true});
+  list.addEventListener('touchmove',e=>{
+    if(!touchEl)return;
+    e.preventDefault();
+    const touch=e.touches[0];
+    const target=document.elementFromPoint(touch.clientX,touch.clientY);
+    const item=target?target.closest('.order-item'):null;
+    if(item&&item!==touchEl){
+      const rect=item.getBoundingClientRect();
+      const mid=rect.top+rect.height/2;
+      if(touch.clientY<mid)list.insertBefore(touchEl,item);
+      else list.insertBefore(touchEl,item.nextSibling);
+    }
+  },{passive:false});
+  list.addEventListener('touchend',()=>{
+    if(touchEl)touchEl.style.opacity='1';
+    touchEl=null;
+    [...list.querySelectorAll('.order-item')].forEach((el,i)=>el.querySelector('.num').textContent=i+1);
+  });
+}
+
+// ===== DATE WRITING =====
+function generateDateExercise(){
+  dateScore=0;dateTotal=0;dateIdx=0;
+  dateQuestions=[];
+  for(let i=0;i<10;i++){
+    const d=Math.floor(Math.random()*28)+1;
+    const m=MONTHS[Math.floor(Math.random()*12)];
+    const display=d+' '+m.ua;
+    const answer=d===1?'le premier '+m.fr:'le '+d+' '+m.fr;
+    dateQuestions.push({display,answer,day:d,month:m});
+  }
+  showDate();
+}
+function showDate(){
+  if(dateIdx>=dateQuestions.length){
+    document.getElementById('dateQ').textContent='🎉 Готово! Результат: '+dateScore+' / '+dateTotal;
+    document.getElementById('dateInput').style.display='none';
+    document.querySelector('#dtDates .tyBt').style.display='none';
+    document.getElementById('dateNext').style.display='none';
+    return;
+  }
+  const q=dateQuestions[dateIdx];
+  document.getElementById('dateQ').textContent='Напишіть: '+q.display;
+  document.getElementById('dateInput').value='';
+  document.getElementById('dateInput').style.display='block';
+  document.querySelector('#dtDates .tyBt').style.display='block';
+  document.getElementById('dateFb').textContent='';
+  document.getElementById('dateFb').className='tf';
+  document.getElementById('dateNext').style.display='none';
+  document.getElementById('dateScore').textContent='Рахунок: '+dateScore+' / '+dateTotal;
+  document.getElementById('dateInput').focus();
+}
+function checkDate(){
+  const q=dateQuestions[dateIdx];
+  const a=document.getElementById('dateInput').value.trim().toLowerCase();
+  dateTotal++;
+  const fb=document.getElementById('dateFb');
+  if(a===q.answer.toLowerCase()){
+    fb.className='tf tok';fb.textContent='✓ Правильно!';dateScore++;
+    spk(q.answer);
+  } else {
+    fb.className='tf tno';fb.innerHTML='✗ Відповідь: <strong>'+q.answer+'</strong>';
+    spk(q.answer);
+  }
+  document.getElementById('dateScore').textContent='Рахунок: '+dateScore+' / '+dateTotal;
+  document.getElementById('dateNext').style.display='block';
+}
+function nextDate(){dateIdx++;showDate()}
+document.getElementById('dateInput').addEventListener('keydown',e=>{if(e.key==='Enter')checkDate()});
+
+// ===== DT QUIZ =====
+function generateDtQuiz(){
+  dtqScore=0;dtqTotal=0;dtqIdx=0;
+  dtqQuestions=[];
+  // Mix different question types
+  // Type 1: Day translation
+  DAYS.forEach(d=>dtqQuestions.push({q:'Як французькою "'+d.ua+'"?',correct:d.fr,type:'day'}));
+  // Type 2: Month translation
+  MONTHS.forEach(m=>dtqQuestions.push({q:'Як французькою "'+m.ua+'"?',correct:m.fr,type:'month'}));
+  // Type 3: Season translation
+  SEASONS.forEach(s=>dtqQuestions.push({q:'Як французькою "'+s.ua+'"?',correct:s.fr,type:'season'}));
+  // Type 4: What comes after?
+  for(let i=0;i<6;i++){
+    const idx=Math.floor(Math.random()*DAYS.length);
+    const nextIdx=(idx+1)%DAYS.length;
+    dtqQuestions.push({q:'Що йде після '+DAYS[idx].fr+'?',correct:DAYS[nextIdx].fr,type:'day_next'});
+  }
+  for(let i=0;i<6;i++){
+    const idx=Math.floor(Math.random()*MONTHS.length);
+    const nextIdx=(idx+1)%MONTHS.length;
+    dtqQuestions.push({q:'Що йде після '+MONTHS[idx].fr+'?',correct:MONTHS[nextIdx].fr,type:'month_next'});
+  }
+  dtqQuestions=sh(dtqQuestions).slice(0,15);
+  showDtQuiz();
+}
+function showDtQuiz(){
+  if(dtqIdx>=dtqQuestions.length){
+    document.getElementById('dtQQ').textContent='🎉 Результат: '+dtqScore+' / '+dtqTotal;
+    document.getElementById('dtQO').innerHTML='<button class="ex-next" onclick="generateDtQuiz()">Ще раз 🔄</button>';
+    document.getElementById('dtQNext').style.display='none';
+    return;
+  }
+  const q=dtqQuestions[dtqIdx];
+  document.getElementById('dtQQ').textContent=q.q;
+  document.getElementById('dtQNext').style.display='none';
+  
+  // Generate options
+  let opts=[q.correct];
+  let pool;
+  if(q.type==='day'||q.type==='day_next') pool=DAYS.map(d=>d.fr);
+  else if(q.type==='month'||q.type==='month_next') pool=MONTHS.map(m=>m.fr);
+  else pool=SEASONS.map(s=>s.fr);
+  pool=pool.filter(x=>x!==q.correct);
+  pool=sh(pool);
+  while(opts.length<4&&pool.length) opts.push(pool.shift());
+  opts=sh(opts);
+  
+  document.getElementById('dtQO').innerHTML=opts.map(o=>'<button class="ex-opt" onclick="checkDtQuiz(this,\''+encodeURIComponent(q.correct)+'\')">'+o+'</button>').join('');
+  document.getElementById('dtQScore').textContent='Рахунок: '+dtqScore+' / '+dtqTotal;
+}
+function checkDtQuiz(el,ecor){
+  const cor=decodeURIComponent(ecor);
+  dtqTotal++;
+  document.querySelectorAll('#dtQO .ex-opt').forEach(b=>{b.classList.add('dis');if(b.textContent===cor)b.classList.add('ok')});
+  if(el.textContent===cor){el.classList.add('ok');dtqScore++}else el.classList.add('no');
+  document.getElementById('dtQScore').textContent='Рахунок: '+dtqScore+' / '+dtqTotal;
+  document.getElementById('dtQNext').style.display='block';
+  spk(cor);
+}
+function nextDtQuiz(){dtqIdx++;showDtQuiz()}
+
+// ========== INIT ==========
+V=V_A2; TM=TM_A2;
+AT=[...new Set(V.map(w=>w.t))];
+init();
+
+// Petals
+for(let i=0;i<10;i++){const p=document.createElement('div');p.className='petal';p.style.left=Math.random()*100+'vw';p.style.animationDuration=(8+Math.random()*12)+'s';p.style.animationDelay=(Math.random()*15)+'s';p.style.width=(8+Math.random()*7)+'px';p.style.height=p.style.width;p.style.background='hsl('+(340+Math.random()*20)+',60%,'+(85+Math.random()*10)+'%)';document.body.appendChild(p)}
+
+// Show download banner if in iframe
+try{if(window.self!==window.top)document.getElementById('dlBanner').style.display='block'}catch(e){document.getElementById('dlBanner').style.display='block'}
+</script>
+</body>
+</html>
