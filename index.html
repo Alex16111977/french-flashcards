@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8"><meta name="referrer" content="no-referrer">
+<meta charset="UTF-8">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="referrer" content="no-referrer">
 <title>Français A1–A2 — Слова з Парижу 🗼</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400;600;700&display=swap');
@@ -239,7 +239,7 @@ h1,h2,.fN{font-family:'Playfair Display',serif}
   <div class="thdr">
     <div class="uB" id="uB">UNITÉ 1–12</div>
     <div class="fN" id="fN">Tous les thèmes</div>
-    <div class="uN" id="uN">Усі теми — <span id="tC">0</span> слів</div>
+    <div class="uN" id="uN">Усі теми — 0 слів</div>
   </div>
   <div class="stats">
     <span class="sk">Знаю: <b id="kC">0</b></span>
@@ -278,7 +278,7 @@ h1,h2,.fN{font-family:'Playfair Display',serif}
         <div class="ri">🗼</div>
         <div class="rt">Magnifique!</div>
         <div class="rs" id="rSc">0%</div>
-        <div class="rl">слів вивчено</div>
+        <div class="rl" id="rSl">слів вивчено</div>
         <button onclick="re()">Ще раз</button>
         <button onclick="reU()" style="background:#fff;color:#c2185b;border:2px solid #c2185b;margin-top:8px">Незнайомі</button>
       </div>
@@ -307,7 +307,7 @@ h1,h2,.fN{font-family:'Playfair Display',serif}
         <div class="ri">🎯</div>
         <div class="rt">Résultat!</div>
         <div class="rs" id="rQS">0%</div>
-        <div class="rl">правильних</div>
+        <div class="rl" id="rQL">правильних</div>
         <button onclick="stQ()">Ще раз</button>
       </div>
     </div>
@@ -332,7 +332,7 @@ h1,h2,.fN{font-family:'Playfair Display',serif}
         <div class="ri">✍️</div>
         <div class="rt">Bravo!</div>
         <div class="rs" id="rTS">0%</div>
-        <div class="rl">правильно</div>
+        <div class="rl" id="rTL">правильно</div>
         <button onclick="stTy()">Ще раз</button>
       </div>
     </div>
@@ -360,6 +360,7 @@ h1,h2,.fN{font-family:'Playfair Display',serif}
   <div class="dt-section">
     <div class="dt-nav">
       <button class="dt-btn active" onclick="dtSwitch('learn',this)">📖 Вивчення</button>
+      <button class="dt-btn" onclick="dtSwitch('dtcards',this)">🃏 Картки</button>
       <button class="dt-btn" onclick="dtSwitch('clock',this)">🕐 Годинник</button>
       <button class="dt-btn" onclick="dtSwitch('days',this)">📅 Дні тижня</button>
       <button class="dt-btn" onclick="dtSwitch('months',this)">🗓 Місяці</button>
@@ -388,6 +389,55 @@ h1,h2,.fN{font-family:'Playfair Display',serif}
       <div class="dt-card">
         <h3>Корисні вирази</h3>
         <div class="dt-grid" id="dtExpGrid"></div>
+      </div>
+    </div>
+
+    <!-- DT FLASHCARDS -->
+    <div id="dtCardsSection" class="dt-sub" style="display:none">
+      <div class="thdr">
+        <div class="uB" id="dtcUB">ДАТА / ЧАС</div>
+        <div class="fN" id="dtcFN">Tous les mots</div>
+        <div class="uN" id="dtcUN">Усі слова</div>
+      </div>
+      <div class="tBar" id="dtcTBar"></div>
+      <div class="stats">
+        <span class="sk">Знаю: <b id="dtcKC">0</b></span>
+        <span class="su">Вчу: <b id="dtcUC">0</b></span>
+        <span class="st">Всього: <b id="dtcTC">0</b></span>
+      </div>
+      <div class="sWrap">
+        <div class="cNum"><span id="dtcCN">1</span> / <span id="dtcTN">0</span></div>
+        <div style="max-width:600px;margin:0 auto"><div class="pF" id="dtcPF" style="width:0%"></div></div>
+        <div id="dtcArea">
+          <div id="dtcBox" class="cBox">
+            <div class="cI" id="dtcCI">
+              <div class="cF"><div class="cL" id="dtcFL">Français</div><div class="cW" id="dtcFW">…</div><div class="cH">натисни, щоб перевернути ✧</div></div>
+              <div class="cB"><div class="cL" id="dtcBL">Українська</div><div class="cW" id="dtcBW">…</div><div class="cCt" id="dtcBCt"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="btns">
+          <button class="ab no" onclick="dtcMk(0)">✗</button>
+          <button class="ab ar" onclick="dtcPv()">‹</button>
+          <button class="ab sp" onclick="dtcSpk()">🔊</button>
+          <button class="ab ar" onclick="dtcNx()">›</button>
+          <button class="ab ok" onclick="dtcMk(1)">✓</button>
+        </div>
+        <div style="text-align:center;font-size:.78em;color:#b0809a">не знаю<span style="display:inline-block;width:100px"></span>знаю</div>
+        <div class="mbar">
+          <button class="mbtn active" onclick="dtcSM('all',this)">Усі</button>
+          <button class="mbtn" onclick="dtcSM('unknown',this)">Незнайомі</button>
+          <button class="mbtn" onclick="dtcSM('shuffle',this)">Перемішати</button>
+          <button class="mbtn" onclick="dtcSM('reverse',this)">UA→FR</button>
+        </div>
+        <div class="rov" id="dtcResult">
+          <div class="ri">📅</div>
+          <div class="rt">Magnifique!</div>
+          <div class="rs" id="dtcRS">0%</div>
+          <div class="rl">слів вивчено</div>
+          <button onclick="dtcRe()">Ще раз</button>
+          <button onclick="dtcReU()" style="background:#fff;color:#c2185b;border:2px solid #c2185b;margin-top:8px">Незнайомі</button>
+        </div>
       </div>
     </div>
 
@@ -619,7 +669,6 @@ function init(){
   b.innerHTML='<button class="tb active" onclick="sT(\'all\',this)">✧ Усі</button>';
   AT.forEach(t=>{const m=TM[t];b.innerHTML+='<button class="tb" onclick="sT(\''+t.replace(/'/g,"\\'")+'\',this)">'+(m?m.f.substring(0,18):t)+'</button>'});
   fC();rC();uS();
-  document.getElementById('tC').textContent=V.length;
   document.getElementById('tC2').textContent=V.length;
   uTH();
 }
@@ -633,7 +682,8 @@ function uTH(){
   if(CT==='all'){
     document.getElementById('uB').textContent=currentLevel==='A1'?'THÈME 1–14':'UNITÉ 1–12';
     document.getElementById('fN').textContent='Tous les thèmes';
-    document.getElementById('uN').innerHTML='Усі теми — '+gC().length+' слів';
+    var cnt=gC().length;
+    document.getElementById('uN').innerHTML='Усі теми — '+cnt+' слів';
   } else {
     const m=TM[CT]||{f:CT,u:'—'};
     document.getElementById('uB').textContent=m.u.toUpperCase();
@@ -707,14 +757,66 @@ function dtSwitch(sec,el){
   document.querySelectorAll('.dt-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
   document.querySelectorAll('.dt-sub').forEach(s=>s.style.display='none');
-  const map={learn:'dtLearn',clock:'dtClock',days:'dtDays',months:'dtMonths',dates:'dtDates',quiz:'dtQuizSec'};
+  const map={learn:'dtLearn',dtcards:'dtCardsSection',clock:'dtClock',days:'dtDays',months:'dtMonths',dates:'dtDates',quiz:'dtQuizSec'};
   document.getElementById(map[sec]).style.display='block';
   if(sec==='clock')generateClock();
+  if(sec==='dtcards')dtcInit();
   if(sec==='days')startDaysOrder();
   if(sec==='months')startMonthsOrder();
   if(sec==='dates')generateDateExercise();
   if(sec==='quiz')generateDtQuiz();
 }
+
+// ===== DT FLASHCARDS =====
+const V_DT=[];
+// Build DT vocabulary from all date/time data
+DAYS.forEach(d=>V_DT.push({fr:d.fr,ua:d.ua,t:"Дні тижня"}));
+MONTHS.forEach(m=>V_DT.push({fr:m.fr,ua:m.ua,t:"Місяці"}));
+SEASONS.forEach(s=>V_DT.push({fr:s.fr,ua:s.ua,t:"Пори року"}));
+TIME_WORDS.forEach(t=>V_DT.push({fr:t.fr,ua:t.ua,t:"Час"}));
+DT_EXPRESSIONS.forEach(e=>V_DT.push({fr:e.fr,ua:e.ua,t:"Вирази"}));
+
+const DTC_THEMES=[...new Set(V_DT.map(w=>w.t))];
+let dtcCT='all',dtcCM='all',dtcCC=[],dtcCI=0,dtcKN=new Set(),dtcUN=new Set(),dtcFL=false,dtcRV=false;
+
+function dtcGetC(){return dtcCT==='all'?[...V_DT]:V_DT.filter(w=>w.t===dtcCT)}
+function dtcInit(){
+  const b=document.getElementById('dtcTBar');
+  b.innerHTML='<button class="tb active" onclick="dtcST(\'all\',this)">✧ Усі</button>';
+  DTC_THEMES.forEach(t=>{b.innerHTML+='<button class="tb" onclick="dtcST(\''+t.replace(/'/g,"\\'")+'\',this)">'+t+'</button>'});
+  document.getElementById('dtcTC').textContent=V_DT.length;
+  document.getElementById('dtcUN').textContent='Усі слова — '+V_DT.length;
+  dtcFC();dtcRC();dtcUS();
+}
+function dtcST(t,el){dtcCT=t;document.querySelectorAll('#dtcTBar .tb').forEach(b=>b.classList.remove('active'));el.classList.add('active');dtcCI=0;dtcFC();dtcRC();dtcUS();
+  if(dtcCT==='all'){document.getElementById('dtcFN').textContent='Tous les mots';document.getElementById('dtcUN').textContent='Усі слова — '+dtcGetC().length}
+  else{document.getElementById('dtcFN').textContent=dtcCT;document.getElementById('dtcUN').textContent=dtcCT+' — '+dtcGetC().length+' слів'}
+}
+function dtcFC(){let c=dtcGetC();if(dtcCM==='unknown')c=c.filter(w=>dtcUN.has(w.fr));if(dtcCM==='shuffle'||dtcCM==='reverse')c=sh([...c]);dtcCC=c;dtcRV=dtcCM==='reverse';document.getElementById('dtcResult').classList.remove('vis')}
+function dtcRC(){if(!dtcCC.length){document.getElementById('dtcFW').textContent='Немає карток';document.getElementById('dtcBW').textContent='—';document.getElementById('dtcCN').textContent='0';document.getElementById('dtcTN').textContent='0';return}
+  const c=dtcCC[dtcCI];
+  document.getElementById('dtcFW').textContent=dtcRV?c.ua:c.fr;
+  document.getElementById('dtcBW').textContent=dtcRV?c.fr:c.ua;
+  document.getElementById('dtcFL').textContent=dtcRV?'Українська':'Français';
+  document.getElementById('dtcBL').textContent=dtcRV?'Français':'Українська';
+  document.getElementById('dtcBCt').textContent=c.t;
+  document.getElementById('dtcCN').textContent=dtcCI+1;
+  document.getElementById('dtcTN').textContent=dtcCC.length;
+  dtcFL=false;document.getElementById('dtcCI').classList.remove('flipped');
+  document.getElementById('dtcPF').style.width=((dtcCI+1)/dtcCC.length)*100+'%'}
+function dtcFlip(){dtcFL=!dtcFL;document.getElementById('dtcCI').classList.toggle('flipped')}
+function dtcNx(){if(!dtcCC.length||dtcCI>=dtcCC.length-1)return;const c=document.getElementById('dtcBox');c.classList.add('ao');setTimeout(()=>{c.classList.remove('ao');dtcCI++;dtcRC();c.classList.add('ai');setTimeout(()=>c.classList.remove('ai'),300)},200)}
+function dtcPv(){if(dtcCI>0){dtcCI--;dtcRC()}}
+function dtcSpk(){if(dtcCC[dtcCI])spk(dtcCC[dtcCI].fr)}
+function dtcMk(ok){if(!dtcCC.length)return;const c=dtcCC[dtcCI];if(ok){dtcKN.add(c.fr);dtcUN.delete(c.fr)}else{dtcUN.add(c.fr);dtcKN.delete(c.fr)}dtcUS();
+  if(dtcCI<dtcCC.length-1)dtcNx();else{const tc=dtcGetC(),k=tc.filter(w=>dtcKN.has(w.fr)).length;document.getElementById('dtcRS').textContent=Math.round(k/tc.length*100)+'%';document.getElementById('dtcResult').classList.add('vis')}}
+function dtcUS(){const tc=dtcGetC();document.getElementById('dtcKC').textContent=tc.filter(w=>dtcKN.has(w.fr)).length;document.getElementById('dtcUC').textContent=tc.filter(w=>dtcUN.has(w.fr)).length}
+function dtcRe(){dtcCI=0;dtcFC();dtcRC();dtcUS()}
+function dtcReU(){dtcCM='unknown';dtcCI=0;dtcFC();dtcRC();dtcUS()}
+function dtcSM(m,el){dtcCM=m;document.querySelectorAll('#dtCardsSection .mbtn').forEach(b=>b.classList.remove('active'));el.classList.add('active');dtcCI=0;dtcFC();dtcRC();dtcUS()}
+document.getElementById('dtcBox').addEventListener('click',dtcFlip);
+document.getElementById('dtcArea').addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+document.getElementById('dtcArea').addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>60){d<0?dtcNx():dtcPv()}},{passive:true});
 
 // ===== CLOCK EXERCISE =====
 function generateClock(){
