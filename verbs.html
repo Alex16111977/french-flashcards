@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Дієслова — Français</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <div id="chrome-top"></div>
+
+  <section class="pagehead">
+    <div>
+      <div class="kicker">Модуль 03</div>
+      <h1>Дієслова <em>verbes</em></h1>
+      <p class="lede">Найуживаніші дієслова, відмінені у чотирьох часах. Перемикай час — картки оновлюються.</p>
+    </div>
+    <div class="meta">
+      <span>усього</span><b id="nV">—</b>
+    </div>
+  </section>
+
+  <div class="row" style="align-items:center;gap:12px;margin-bottom:14px">
+    <div class="levels" id="lvlBar">
+      <button class="chip active" data-lvl="all">Усі</button>
+      <button class="chip" data-lvl="A1">A1</button>
+      <button class="chip" data-lvl="A2">A2</button>
+      <button class="chip" data-lvl="B1">B1</button>
+    </div>
+    <div style="flex:1"></div>
+    <div class="levels" id="tBar">
+      <button class="chip active" data-t="présent">présent</button>
+      <button class="chip" data-t="passé composé">passé composé</button>
+      <button class="chip" data-t="imparfait">imparfait</button>
+      <button class="chip" data-t="futur">futur</button>
+    </div>
+  </div>
+
+  <input type="search" class="tinput" id="search" placeholder="пошук (être, parler, хотіти…)" style="max-width:100%;font-family:'Instrument Sans';font-size:15px;text-align:left">
+
+  <div class="conj" id="grid"></div>
+
+  <div id="chrome-foot"></div>
+</div>
+
+<script src="data.js"></script>
+<script src="shared.js"></script>
+<script>
+renderChrome('verbs');
+let lvl='all', tense='présent', query='';
+
+const PRONOUNS = ['je','tu','il/elle','nous','vous','ils/elles'];
+
+function render(){
+  const list = VERBS.filter(v=>{
+    if(lvl!=='all' && v.level!==lvl) return false;
+    if(query){
+      const q=query.toLowerCase();
+      return v.fr.toLowerCase().includes(q) || v.ua.toLowerCase().includes(q);
+    }
+    return true;
+  });
+  document.getElementById('nV').textContent = list.length;
+  document.getElementById('grid').innerHTML = list.map(v=>`
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">
+        <div>
+          <span class="serif" style="font-size:22px;color:var(--claret);font-style:italic">${v.fr}</span>
+          <span style="color:var(--mute);font-size:13px;margin-left:6px">${v.ua}</span>
+        </div>
+        <button class="ctrl sm sp" onclick="speakFR('${v.fr.replace(/'/g,"\\'")}')" title="озвучити">🔊</button>
+      </div>
+      <h4>${tense} <span style="font-weight:400;color:var(--mute);margin-left:4px;letter-spacing:0;text-transform:none">· ${v.level}</span></h4>
+      ${v.conj[tense].map((line,i)=>{
+        const parts = line.split(' ');
+        const pron = parts[0];
+        const rest = parts.slice(1).join(' ');
+        return `<div class="line"><span>${PRONOUNS[i]}</span><span>${rest}</span></div>`;
+      }).join('')}
+      <div class="ex">«${v.example}»</div>
+    </div>
+  `).join('');
+}
+
+document.querySelectorAll('#lvlBar .chip').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#lvlBar .chip').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); lvl=b.dataset.lvl; render();
+});
+document.querySelectorAll('#tBar .chip').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#tBar .chip').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); tense=b.dataset.t; render();
+});
+document.getElementById('search').addEventListener('input',e=>{query=e.target.value;render()});
+
+render();
+</script>
+</body>
+</html>

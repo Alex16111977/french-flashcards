@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Час і дата — Français</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <div id="chrome-top"></div>
+
+  <section class="pagehead">
+    <div>
+      <div class="kicker">Модуль 05</div>
+      <h1>Час <em>&amp;</em> дата</h1>
+      <p class="lede">Дні тижня, місяці, пори року та як сказати котра година. Натисни на будь-що, щоб почути.</p>
+    </div>
+    <div class="meta">
+      <span>сьогодні (fr)</span><b id="today">—</b>
+    </div>
+  </section>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px">
+    <section class="panel">
+      <h2>Дні тижня · les jours</h2>
+      <p style="color:var(--mute);font-size:13px;margin-bottom:12px">У французькій тиждень починається з понеділка. Назви пишуться з малої літери.</p>
+      <div id="days" style="display:flex;flex-direction:column;gap:6px"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Місяці · les mois</h2>
+      <p style="color:var(--mute);font-size:13px;margin-bottom:12px">«У січні» — en janvier. «Третього травня» — le trois mai.</p>
+      <div id="months" style="display:grid;grid-template-columns:1fr 1fr;gap:6px"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Пори року · les saisons</h2>
+      <p style="color:var(--mute);font-size:13px;margin-bottom:12px">«Влітку» — en été. «Взимку» — en hiver. «Навесні» — au printemps.</p>
+      <div id="seasons" style="display:grid;grid-template-columns:1fr 1fr;gap:8px"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Годинник · l'heure</h2>
+      <div style="text-align:center;margin:14px 0">
+        <svg id="clock" viewBox="0 0 200 200" width="160" height="160" style="filter:drop-shadow(0 4px 14px rgba(40,30,10,.08))">
+          <circle cx="100" cy="100" r="92" fill="#fbf7ee" stroke="#7a1f2b" stroke-width="2"/>
+          <g id="ticks"></g>
+          <line id="hh" x1="100" y1="100" x2="100" y2="55" stroke="#1d1b18" stroke-width="5" stroke-linecap="round"/>
+          <line id="mm" x1="100" y1="100" x2="100" y2="35" stroke="#7a1f2b" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="100" cy="100" r="4" fill="#1d1b18"/>
+        </svg>
+      </div>
+      <div id="timeExp" style="display:flex;flex-direction:column;gap:6px"></div>
+    </section>
+  </div>
+
+  <div class="rule-orn"></div>
+
+  <section class="panel">
+    <h2>Як сказати дату</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:12px">
+      <div class="callout" style="background:#eef5ec;border-left-color:var(--sage)"><b style="color:var(--sage)">Формула:</b><br>
+        <span class="serif" style="font-size:18px;color:var(--ink)">le + число + місяць</span><br>
+        <span style="color:var(--mute)">«3 травня» → le 3 mai</span>
+      </div>
+      <div class="callout"><b>Перше число:</b><br>
+        <span class="serif" style="font-size:18px;color:var(--ink)">le 1<sup>er</sup> janvier</span><br>
+        <span style="color:var(--mute)">читається: le premier janvier</span>
+      </div>
+      <div class="callout" style="background:#fbeaec;border-left-color:var(--claret)"><b style="color:var(--claret)">Рік:</b><br>
+        <span class="serif" style="font-size:18px;color:var(--ink)">en 2026</span> → en deux mille vingt-six<br>
+      </div>
+    </div>
+  </section>
+
+  <div id="chrome-foot"></div>
+</div>
+
+<script src="data.js"></script>
+<script src="shared.js"></script>
+<script>
+renderChrome('datetime');
+
+// today
+const now = new Date();
+const jj = now.getDay(); // 0=Sun
+const dayIdx = jj===0?6:jj-1;
+document.getElementById('today').textContent = DAYS[dayIdx].fr + ', ' + now.getDate() + ' ' + MONTHS[now.getMonth()].fr;
+
+// days
+document.getElementById('days').innerHTML = DAYS.map((d,i)=>`
+  <div class="phrases" style="display:block">
+    <div class="p" style="border-left-color:${i===dayIdx?'var(--claret)':'var(--rule-2)'};background:${i===dayIdx?'#fbeaec':'var(--paper)'}">
+      <div class="fr"><span><span class="mono" style="color:var(--mute);font-size:11px;margin-right:8px">${String(i+1).padStart(2,'0')}</span>${d.fr}</span>
+        <span class="sp" onclick="speakFR('${d.fr}')">🔊</span></div>
+      <div class="ua">${d.ua}</div>
+    </div>
+  </div>
+`).join('');
+
+// months
+document.getElementById('months').innerHTML = MONTHS.map((m,i)=>`
+  <div class="p" style="background:var(--paper);border:1px solid var(--rule);border-left:3px solid var(--ochre);border-radius:4px;padding:10px 12px">
+    <div class="fr" style="font:500 15px 'Fraunces',serif;display:flex;justify-content:space-between">
+      <span><span class="mono" style="color:var(--mute);font-size:11px;margin-right:6px">${String(i+1).padStart(2,'0')}</span>${m.fr}</span>
+      <span style="color:var(--ochre);cursor:pointer;font-size:13px" onclick="speakFR('${m.fr}')">🔊</span>
+    </div>
+    <div class="ua" style="font:400 12px 'Instrument Sans';color:var(--mute)">${m.ua}</div>
+  </div>
+`).join('');
+
+// seasons
+document.getElementById('seasons').innerHTML = SEASONS.map((s,i)=>{
+  const icons=['✿','☀','🍂','❄'];
+  const bgs=['#eef5ec','#fff8e6','#f7efde','#eef2f8'];
+  return `<div style="background:${bgs[i]};border:1px solid var(--rule);border-radius:6px;padding:14px;display:flex;gap:10px;align-items:center;cursor:pointer" onclick="speakFR('${s.fr}')">
+    <div style="font-size:24px;color:var(--claret)">${icons[i]}</div>
+    <div>
+      <div class="serif" style="font-size:17px;font-style:italic;color:var(--ink)">${s.fr}</div>
+      <div style="font-size:12px;color:var(--mute)">${s.ua}</div>
+    </div>
+  </div>`;
+}).join('');
+
+// time expressions
+document.getElementById('timeExp').innerHTML = TIME_EXP.map(t=>`
+  <div class="p" style="background:var(--paper);border:1px solid var(--rule);border-left:3px solid var(--claret);border-radius:4px;padding:10px 12px">
+    <div class="fr" style="font:500 14px 'Fraunces',serif;display:flex;justify-content:space-between;gap:6px">
+      <span>${t.fr}</span>
+      <span style="color:var(--ochre);cursor:pointer" onclick="speakFR('${t.fr.replace(/'/g,"\\'")}')">🔊</span>
+    </div>
+    <div class="ua" style="font:400 12px 'Instrument Sans';color:var(--mute)">${t.ua}</div>
+  </div>
+`).join('');
+
+// clock ticks + hands animated
+(function(){
+  const ticks = document.getElementById('ticks');
+  let html='';
+  for(let i=0;i<12;i++){
+    const a = (i*30-90)*Math.PI/180;
+    const x1=100+Math.cos(a)*85, y1=100+Math.sin(a)*85;
+    const x2=100+Math.cos(a)*78, y2=100+Math.sin(a)*78;
+    html+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#1d1b18" stroke-width="${i%3===0?2.5:1}"/>`;
+  }
+  ticks.innerHTML=html;
+  function tick(){
+    const d=new Date();
+    const h=((d.getHours()%12)+d.getMinutes()/60)*30;
+    const m=d.getMinutes()*6 + d.getSeconds()*0.1;
+    document.getElementById('hh').setAttribute('transform',`rotate(${h} 100 100)`);
+    document.getElementById('mm').setAttribute('transform',`rotate(${m} 100 100)`);
+  }
+  tick(); setInterval(tick,1000);
+})();
+</script>
+</body>
+</html>

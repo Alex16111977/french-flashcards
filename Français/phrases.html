@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Фрази — Français</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <div id="chrome-top"></div>
+
+  <section class="pagehead">
+    <div>
+      <div class="kicker">Модуль 06</div>
+      <h1>Фрази <em>usage</em></h1>
+      <p class="lede">Справжні фрази для конкретних ситуацій. Обери категорію — або перегортай усі.</p>
+    </div>
+    <div class="meta"><span>ситуацій</span><b id="nS">—</b></div>
+  </section>
+
+  <div class="themes" id="cats"></div>
+
+  <div id="body" style="display:flex;flex-direction:column;gap:20px"></div>
+
+  <div id="chrome-foot"></div>
+</div>
+
+<script src="data.js"></script>
+<script src="shared.js"></script>
+<script>
+renderChrome('phrases');
+const cats = Object.keys(PHRASES);
+document.getElementById('nS').textContent = cats.length;
+
+let active = null;
+
+function renderCats(){
+  document.getElementById('cats').innerHTML =
+    `<button class="chip ${active===null?'active':''}" data-c="">Усі</button>` +
+    cats.map(c=>`<button class="chip ${active===c?'active':''}" data-c="${c}">${c}</button>`).join('');
+  document.querySelectorAll('#cats .chip').forEach(b=>b.onclick=()=>{
+    active = b.dataset.c || null;
+    renderCats(); renderBody();
+  });
+}
+
+function renderBody(){
+  const show = active ? [active] : cats;
+  document.getElementById('body').innerHTML = show.map(c=>`
+    <section class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px">
+        <h2>${c}</h2>
+        <span class="eyebrow">${PHRASES[c].length} фраз</span>
+      </div>
+      <div class="phrases">
+        ${PHRASES[c].map(p=>`
+          <div class="p">
+            <div class="fr">
+              <span>${p.fr}</span>
+              <span class="sp" onclick="speakFR(${JSON.stringify(p.fr).replace(/"/g,'&quot;')})">🔊</span>
+            </div>
+            <div class="ua">${p.ua}</div>
+          </div>
+        `).join('')}
+      </div>
+    </section>
+  `).join('');
+}
+
+renderCats();
+renderBody();
+</script>
+</body>
+</html>

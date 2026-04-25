@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Діалоги — Français</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <div id="chrome-top"></div>
+
+  <section class="pagehead">
+    <div>
+      <div class="kicker">Модуль 07</div>
+      <h1>Діалоги <em>scènes</em></h1>
+      <p class="lede">Живі сцени з повсякденного життя. Натисни на репліку, щоб почути.</p>
+    </div>
+    <div class="meta"><span>сцен</span><b id="nD">—</b></div>
+  </section>
+
+  <div class="levels" style="margin-bottom:14px">
+    <button class="chip active" data-lvl="all">Усі</button>
+    <button class="chip" data-lvl="A1">A1</button>
+    <button class="chip" data-lvl="A2">A2</button>
+    <button class="chip" data-lvl="B1">B1</button>
+  </div>
+
+  <div id="list" style="display:flex;flex-direction:column;gap:20px"></div>
+
+  <div id="chrome-foot"></div>
+</div>
+
+<script src="data.js"></script>
+<script src="shared.js"></script>
+<script>
+renderChrome('dialogues');
+document.getElementById('nD').textContent = DIALOGUES.length;
+
+let lvl='all', hidden={};
+
+function render(){
+  const list = DIALOGUES.filter(d=>lvl==='all'||d.level===lvl);
+  document.getElementById('list').innerHTML = list.map((d,idx)=>{
+    const h = !!hidden[idx];
+    return `
+    <section class="dialogue">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;gap:10px;flex-wrap:wrap">
+        <h3 style="font:600 22px 'Fraunces',serif">${d.title}</h3>
+        <div class="row" style="gap:8px;align-items:center">
+          <span class="eyebrow">${d.level}</span>
+          <button class="chip" data-toggle="${idx}">${h?'показати переклад':'приховати переклад'}</button>
+          <button class="chip claret active" data-play="${idx}">▶ програти</button>
+        </div>
+      </div>
+      ${d.turns.map((t,ti)=>`
+        <div class="turn" data-idx="${idx}-${ti}">
+          <div class="who">${t.who}</div>
+          <div class="line">
+            <div class="fr" style="cursor:pointer" onclick="speakFR(${JSON.stringify(t.fr).replace(/"/g,'&quot;')})">
+              ${t.fr} <span class="play">🔊</span>
+            </div>
+            ${h?'':`<div class="ua">${t.ua}</div>`}
+          </div>
+        </div>
+      `).join('')}
+    </section>`;
+  }).join('');
+
+  document.querySelectorAll('[data-toggle]').forEach(b=>b.onclick=()=>{
+    hidden[b.dataset.toggle] = !hidden[b.dataset.toggle]; render();
+  });
+  document.querySelectorAll('[data-play]').forEach(b=>b.onclick=()=>playScene(+b.dataset.play));
+}
+
+function playScene(idx){
+  const d = DIALOGUES[idx];
+  let i=0;
+  (function step(){
+    if(i>=d.turns.length)return;
+    const turn = document.querySelector(`[data-idx="${idx}-${i}"]`);
+    if(turn){
+      turn.style.background='#fff8e6';
+      setTimeout(()=>turn.style.background='',1800);
+    }
+    speakFR(d.turns[i].fr);
+    i++;
+    setTimeout(step, Math.max(1800, d.turns[i-1].fr.length*70));
+  })();
+}
+
+document.querySelectorAll('.levels .chip').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.levels .chip').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');lvl=b.dataset.lvl;render();
+});
+render();
+</script>
+</body>
+</html>

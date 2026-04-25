@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Квіз — Français</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <div id="chrome-top"></div>
+
+  <section class="pagehead">
+    <div>
+      <div class="kicker">Модуль 02</div>
+      <h1>Квіз <em>tests</em></h1>
+      <p class="lede">Чотири режими тренування. Обери рівень, режим — і поїхали.</p>
+    </div>
+    <div class="meta">
+      <span>рахунок</span><b id="score">0 / 0</b>
+      <span style="margin-top:8px;display:block">серія</span><b id="streak" style="color:var(--claret)">0</b>
+    </div>
+  </section>
+
+  <div class="row" style="gap:16px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
+    <div class="levels">
+      <button class="chip active" data-lvl="A1">A1</button>
+      <button class="chip" data-lvl="A2">A2</button>
+      <button class="chip" data-lvl="B1">B1</button>
+      <button class="chip" data-lvl="B2">B2</button>
+    </div>
+    <div style="flex:1"></div>
+    <div class="levels" id="modes">
+      <button class="chip active" data-mode="mcFR">FR → UA</button>
+      <button class="chip" data-mode="mcUA">UA → FR</button>
+      <button class="chip" data-mode="type">друк</button>
+      <button class="chip" data-mode="listen">слух 🔊</button>
+    </div>
+  </div>
+
+  <div class="panel" id="quizPanel" style="min-height:360px">
+    <div class="qstem">
+      <div class="q" id="qLbl">обери правильний переклад</div>
+      <div class="w" id="qWord">—</div>
+      <button class="ctrl sp sm" id="qPlay" title="прослухати" style="margin-top:4px">🔊</button>
+    </div>
+    <div id="qOpts"></div>
+    <div style="text-align:center;margin-top:20px">
+      <button class="btn ghost" id="nextQ" style="display:none">Далі →</button>
+    </div>
+  </div>
+
+  <div class="prog" style="margin-top:14px"><span id="accBar" style="width:0"></span></div>
+  <div style="text-align:center;font-size:12px;color:var(--mute);margin-top:4px">точність: <span id="acc">—</span></div>
+
+  <div id="chrome-foot"></div>
+</div>
+
+<script src="data.js"></script>
+<script src="shared.js"></script>
+<script>
+renderChrome('quiz');
+const PAGE='quiz';
+
+let level='A1', mode='mcFR', q=null, good=0, total=0, streak=0, best=0, answered=false;
+
+function pool(){ return (VOCAB[level]||[]).map(w=>({...w,level})); }
+
+function next(){
+  answered=false;
+  const p = pool();
+  const correct = pick(p);
+  const distract = shuffle(p.filter(x=>x.fr!==correct.fr)).slice(0,3);
+  const opts = shuffle([correct,...distract]);
+  q = {correct, opts};
+  render();
+}
+
+function render(){
+  const opts = document.getElementById('qOpts');
+  const lbl  = document.getElementById('qLbl');
+  const w    = document.getElementById('qWord');
+  const play = document.getElementById('qPlay');
+  play.style.display = 'none';
+
+  if(mode==='mcFR'){
+    lbl.textContent = 'обери правильний переклад';
+    w.textContent = q.correct.fr;
+    opts.className='qopts';
+    opts.innerHTML = q.opts.map((o,i)=>`<button class="qopt" data-fr="${o.fr}"><span class="k">${'ABCD'[i]}</span>${o.ua}</button>`).join('');
+    bindMC();
+  } else if(mode==='mcUA'){
+    lbl.textContent = 'знайди французький відповідник';
+    w.textContent = q.correct.ua;
+    opts.className='qopts';
+    opts.innerHTML = q.opts.map((o,i)=>`<button class="qopt" data-fr="${o.fr}"><span class="k">${'ABCD'[i]}</span><span class="serif" style="color:var(--claret)">${o.fr}</span></button>`).join('');
+    bindMC();
+  } else if(mode==='type'){
+    lbl.textContent = 'напиши французькою (без артиклів)';
+    w.textContent = q.correct.ua;
+    opts.className='';
+    opts.innerHTML = `
+      <input class="tinput" id="tin" placeholder="tapez ici..." autocomplete="off" autocapitalize="off" spellcheck="false">
+      <div style="text-align:center"><button class="btn" id="chk">Перевірити</button></div>
+      <div id="typeFb" style="text-align:center;margin-top:10px;font-size:14px;color:var(--mute)"></div>`;
+    const inp=document.getElementById('tin');inp.focus();
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('chk').click()});
+    document.getElementById('chk').onclick=()=>{
+      const ans = inp.value.trim().toLowerCase();
+      const target = q.correct.fr.toLowerCase().replace(/\(.+?\)/g,'').trim();
+      const alt = target.replace(/^(le |la |les |un |une |des |l'|l')/,'');
+      const ok = ans===target || ans===alt || ans.replace(/^(le |la |les |un |une |des |l'|l')/,'')===alt;
+      inp.classList.add(ok?'ok':'no');
+      document.getElementById('typeFb').innerHTML = ok ? `<span style="color:var(--sage)">✓ точно — ${q.correct.fr}</span>` : `<span style="color:var(--claret)">✗ правильно: <b>${q.correct.fr}</b></span>`;
+      score(ok);
+    };
+  } else if(mode==='listen'){
+    lbl.textContent = 'послухай і обери';
+    w.textContent = '🔊';
+    play.style.display = 'inline-flex';
+    play.onclick = ()=>speakFR(q.correct.fr);
+    setTimeout(()=>speakFR(q.correct.fr),300);
+    opts.className='qopts';
+    opts.innerHTML = q.opts.map((o,i)=>`<button class="qopt" data-fr="${o.fr}"><span class="k">${'ABCD'[i]}</span><span class="serif" style="color:var(--claret)">${o.fr}</span></button>`).join('');
+    bindMC();
+  }
+}
+
+function bindMC(){
+  document.querySelectorAll('.qopt').forEach(b=>b.onclick=()=>{
+    if(answered)return;
+    const ok = b.dataset.fr === q.correct.fr;
+    document.querySelectorAll('.qopt').forEach(x=>{
+      x.classList.add('dis');
+      if(x.dataset.fr===q.correct.fr)x.classList.add('ok');
+    });
+    if(!ok)b.classList.add('no');
+    score(ok);
+  });
+}
+
+function score(ok){
+  answered=true;
+  total++;
+  if(ok){ good++; streak++; best=Math.max(best,streak); toast('✓ ' + q.correct.fr); }
+  else { streak=0; toast('↺ ' + q.correct.fr); Progress.addUnknown(PAGE, q.correct.fr); }
+  if(ok) Progress.addKnown(PAGE, q.correct.fr);
+  document.getElementById('score').textContent = good+' / '+total;
+  document.getElementById('streak').textContent = streak;
+  const acc = total? Math.round(good/total*100):0;
+  document.getElementById('acc').textContent = acc+'%';
+  document.getElementById('accBar').style.width = acc+'%';
+  document.getElementById('nextQ').style.display='inline-flex';
+}
+
+document.getElementById('nextQ').onclick = ()=>{document.getElementById('nextQ').style.display='none';next()};
+
+document.querySelectorAll('.levels .chip[data-lvl]').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.chip[data-lvl]').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');level=b.dataset.lvl;good=0;total=0;streak=0;
+  document.getElementById('score').textContent='0 / 0';document.getElementById('streak').textContent='0';
+  next();
+});
+document.querySelectorAll('#modes .chip').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#modes .chip').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');mode=b.dataset.mode;next();
+});
+
+next();
+document.addEventListener('keydown',e=>{
+  if(answered && (e.key==='Enter'||e.key===' ')){e.preventDefault();document.getElementById('nextQ').click()}
+});
+</script>
+</body>
+</html>

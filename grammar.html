@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Граматика — Français</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <div id="chrome-top"></div>
+
+  <section class="pagehead">
+    <div>
+      <div class="kicker">Модуль 04</div>
+      <h1>Граматика <em>règles</em></h1>
+      <p class="lede">Найважливіші правила — стисло, з таблицями та нотатками. Обери тему збоку.</p>
+    </div>
+    <div class="meta">
+      <span>тем</span><b id="nG">—</b>
+    </div>
+  </section>
+
+  <div style="display:grid;grid-template-columns:240px 1fr;gap:24px">
+    <aside style="position:sticky;top:16px;align-self:start">
+      <div class="eyebrow" style="margin-bottom:10px">Зміст</div>
+      <nav id="toc" style="display:flex;flex-direction:column;gap:2px"></nav>
+    </aside>
+    <main id="body" style="display:flex;flex-direction:column;gap:20px"></main>
+  </div>
+
+  <div id="chrome-foot"></div>
+</div>
+
+<script src="data.js"></script>
+<script src="shared.js"></script>
+<script>
+renderChrome('grammar');
+document.getElementById('nG').textContent = GRAMMAR.length;
+
+const toc = document.getElementById('toc');
+toc.innerHTML = GRAMMAR.map(g=>`
+  <a href="#${g.id}" class="chip" style="justify-content:flex-start;background:transparent;border-color:transparent;padding:8px 10px">
+    <span style="font:700 10px 'JetBrains Mono';color:var(--mute);margin-right:6px">${g.level}</span>
+    ${g.title.split(' — ')[0]}
+  </a>
+`).join('');
+
+const body = document.getElementById('body');
+body.innerHTML = GRAMMAR.map(g=>`
+  <section id="${g.id}" class="panel">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px">
+      <h2>${g.title}</h2>
+      <span class="eyebrow">${g.level}</span>
+    </div>
+    <p style="color:var(--ink-2);margin-bottom:14px">${g.intro}</p>
+    ${g.tables.map(tb=>`
+      <table class="gtable" style="margin-bottom:12px">
+        <thead><tr>${tb.head.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
+        <tbody>${tb.rows.map(r=>`<tr>${r.map((c,i)=>`<td${i>0?' class="fr"':''}>${c}</td>`).join('')}</tr>`).join('')}</tbody>
+      </table>
+    `).join('')}
+    ${g.notes && g.notes.length ? `
+      <div class="callout">
+        <b>Зверни увагу:</b>
+        <ul style="margin:6px 0 0 18px">${g.notes.map(n=>`<li style="margin:3px 0">${n}</li>`).join('')}</ul>
+      </div>`:''}
+  </section>
+`).join('');
+
+// smooth scroll and active indicator
+toc.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t)window.scrollTo({top:t.offsetTop-20,behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>

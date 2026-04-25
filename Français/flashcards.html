@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Картки — Français</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <div id="chrome-top"></div>
+
+  <section class="pagehead">
+    <div>
+      <div class="kicker">Модуль 01</div>
+      <h1>Картки <em>mots</em></h1>
+      <p class="lede">Натисни на картку, щоб побачити переклад. Клавіші ← → для навігації, ↑ для озвучки, ↓ щоб перевернути.</p>
+    </div>
+    <div class="meta">
+      <span>позиція</span><b id="pos">—</b>
+      <span style="margin-top:8px;display:block">вивчено</span><b id="knownN" style="color:var(--sage)">—</b>
+    </div>
+  </section>
+
+  <div class="row" style="align-items:center;gap:16px;margin-bottom:12px">
+    <div class="levels">
+      <button class="chip active" data-lvl="A1">A1</button>
+      <button class="chip" data-lvl="A2">A2</button>
+      <button class="chip" data-lvl="B1">B1</button>
+      <button class="chip" data-lvl="B2">B2</button>
+    </div>
+    <div style="flex:1"></div>
+    <button class="btn ghost" id="shuffleBtn">⇌ Перемішати</button>
+    <button class="btn ghost" id="reviewBtn" title="Тренувати лише складні">↻ Складні (<span id="hardN">0</span>)</button>
+  </div>
+
+  <div class="themes" id="themes"></div>
+
+  <div class="statstrip">
+    <span><span class="dot k"></span>знаю <b id="nKnown">0</b></span>
+    <span><span class="dot u"></span>складні <b id="nUnk">0</b></span>
+    <span><span class="dot t"></span>усього <b id="nTot">0</b></span>
+    <span style="flex:1"></span>
+    <span>тема: <b id="themeLbl">усі</b></span>
+  </div>
+
+  <div class="fc-wrap" id="fcWrap">
+    <div class="fc-inner" id="fcInner">
+      <div class="fc-face front">
+        <div class="lbl">français</div>
+        <div class="word" id="frWord">—</div>
+        <div class="ipa" id="ipa"></div>
+        <div class="hint">натисни, щоб перевернути</div>
+      </div>
+      <div class="fc-face back">
+        <div class="lbl">українською</div>
+        <div class="word" id="uaWord">—</div>
+        <div class="ctx" id="ctxWord"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prog"><span id="progBar" style="width:0"></span></div>
+
+  <div class="fc-controls">
+    <button class="ctrl sm" id="prevBtn" title="← попередня">←</button>
+    <button class="ctrl no" id="noBtn" title="ще не знаю">✗</button>
+    <button class="ctrl sp" id="spBtn" title="озвучити">🔊</button>
+    <button class="ctrl ok" id="okBtn" title="знаю">✓</button>
+    <button class="ctrl sm" id="nextBtn" title="→ наступна">→</button>
+  </div>
+
+  <div id="chrome-foot"></div>
+</div>
+
+<script src="data.js"></script>
+<script src="shared.js"></script>
+<script>
+renderChrome('flashcards');
+const PAGE='flashcards';
+
+let level='A1', theme=null, cards=[], i=0, onlyHard=false;
+
+function loadCards(){
+  let base = onlyHard
+    ? allWords().filter(w=>(Progress.get(PAGE).unknown||[]).includes(w.fr))
+    : (VOCAB[level]||[]).map(w=>({...w,level}));
+  if(theme) base = base.filter(w=>w.t===theme);
+  cards = base;
+  i = 0;
+  render();
+  renderThemes();
+}
+
+function renderThemes(){
+  const holder = document.getElementById('themes');
+  const themes = uniq((VOCAB[level]||[]).map(w=>w.t));
+  holder.innerHTML = `<button class="chip ${theme===null?'active':''}" data-th="">Усі · ${(VOCAB[level]||[]).length}</button>` +
+    themes.map(t=>{
+      const c = (VOCAB[level]||[]).filter(w=>w.t===t).length;
+      return `<button class="chip ${theme===t?'active':''}" data-th="${t}">${t} · ${c}</button>`;
+    }).join('');
+  holder.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{
+    theme = b.dataset.th || null;
+    onlyHard = false;
+    loadCards();
+  });
+}
+
+function render(){
+  const n = cards.length;
+  const p = Progress.get(PAGE);
+  const known = (p.known||[]).filter(x=>cards.some(c=>c.fr===x)).length;
+  const unk   = (p.unknown||[]).filter(x=>cards.some(c=>c.fr===x)).length;
+
+  document.getElementById('nTot').textContent = n;
+  document.getElementById('nKnown').textContent = known;
+  document.getElementById('nUnk').textContent = unk;
+  document.getElementById('knownN').textContent = (p.known||[]).length;
+  document.getElementById('hardN').textContent = (p.unknown||[]).length;
+  document.getElementById('themeLbl').textContent = theme || (onlyHard?'складні':'усі');
+
+  if(!n){
+    document.getElementById('frWord').textContent = '—';
+    document.getElementById('uaWord').textContent = '—';
+    document.getElementById('pos').textContent = '0/0';
+    return;
+  }
+  i = ((i%n)+n)%n;
+  const c = cards[i];
+  document.getElementById('frWord').textContent = c.fr;
+  document.getElementById('uaWord').textContent = c.ua;
+  document.getElementById('ipa').textContent = c.ipa ? '['+c.ipa+']' : '';
+  document.getElementById('ctxWord').textContent = `${c.level||level} · ${c.t}`;
+  document.getElementById('pos').textContent = (i+1)+'/'+n;
+  document.getElementById('progBar').style.width = ((i+1)/n*100)+'%';
+  document.getElementById('fcInner').classList.remove('flip');
+}
+
+function go(d){ if(!cards.length)return; i=(i+d+cards.length)%cards.length; render(); }
+function mark(ok){
+  if(!cards.length)return;
+  const c=cards[i];
+  ok ? Progress.addKnown(PAGE,c.fr) : Progress.addUnknown(PAGE,c.fr);
+  toast(ok?'✓ вивчено':'↺ повторимо');
+  setTimeout(()=>go(1),250);
+}
+
+document.getElementById('fcWrap').onclick = ()=>document.getElementById('fcInner').classList.toggle('flip');
+document.getElementById('prevBtn').onclick = e=>{e.stopPropagation();go(-1)};
+document.getElementById('nextBtn').onclick = e=>{e.stopPropagation();go(1)};
+document.getElementById('okBtn').onclick   = e=>{e.stopPropagation();mark(true)};
+document.getElementById('noBtn').onclick   = e=>{e.stopPropagation();mark(false)};
+document.getElementById('spBtn').onclick   = e=>{e.stopPropagation();if(cards[i])speakFR(cards[i].fr)};
+document.getElementById('shuffleBtn').onclick = ()=>{cards=shuffle(cards);i=0;render();toast('перемішано')};
+document.getElementById('reviewBtn').onclick = ()=>{onlyHard=true;theme=null;loadCards();toast('лише складні слова')};
+
+document.querySelectorAll('.levels .chip').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.levels .chip').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  level = b.dataset.lvl; theme=null; onlyHard=false;
+  loadCards();
+});
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight')go(1);
+  else if(e.key==='ArrowLeft')go(-1);
+  else if(e.key==='ArrowDown'||e.key===' '){e.preventDefault();document.getElementById('fcInner').classList.toggle('flip')}
+  else if(e.key==='ArrowUp'){if(cards[i])speakFR(cards[i].fr)}
+});
+
+loadCards();
+</script>
+</body>
+</html>
