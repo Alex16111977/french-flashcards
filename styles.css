@@ -429,3 +429,35 @@ button{font:inherit;color:inherit}
   .vb-grid{grid-template-columns:1fr}.vb-grid .ln{font-size:17px}
   .bc-inner{min-height:330px}
 }
+
+/* ============================================================
+   Mobile corrections (Édito B1 large-font pages)
+============================================================ */
+@media(max-width:860px){
+  /* grid child must be allowed to shrink, else it overflows the viewport */
+  .main{min-width:0;max-width:100%;overflow-x:hidden}
+  .pagehead{grid-template-columns:1fr}
+  .pagehead h1{font-size:30px}
+  .pagehead .lede{font-size:14px}
+  .pagehead .meta{display:flex;gap:22px;min-width:0;margin-top:6px;text-align:left}
+  /* big trilingual cards */
+  .bc-wrap{max-width:100%}
+  .bc-inner{min-height:330px}
+  .bc-face{padding:24px 16px}
+  .bc-face .fr{font-size:33px;overflow-wrap:anywhere}
+  .bc-face .fr.sm{font-size:25px}
+  .bc-face .fr.xs{font-size:20px}
+  .bc-face .ipa{font-size:18px}
+  .tri{max-width:100%}
+  .tri .row3{grid-template-columns:38px 1fr;gap:10px}
+  .tri .val{font-size:21px;overflow-wrap:anywhere}
+  .tri .val.sm{font-size:18px}
+  .vb-grid{grid-template-columns:1fr;max-width:100%}
+  .vb-grid .ln{font-size:17px;overflow-wrap:anywhere}
+  .vb-tense{font-size:10px;padding:5px 7px}
+  .statstrip{gap:10px 14px}
+  /* chip rows scroll horizontally instead of forcing page width */
+  .units,.themes{flex-wrap:nowrap;overflow-x:auto}
+  /* grammar tables shouldn't blow out the page */
+  .gtable{display:block;overflow-x:auto;white-space:nowrap}
+}

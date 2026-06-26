@@ -99,7 +99,17 @@ function renderConj(){
   // each form already carries its own pronoun (je, j', que je…, reflexive, impératif)
   document.getElementById('grid').innerHTML = forms.map(f=>
     `<div class="ln"><b>${f||'—'}</b></div>`).join('');
+  sizeCard();
 }
+// Grow the flip card so the (taller) conjugation back always fits — esp. mobile
+function sizeCard(){
+  const inner=document.getElementById('inner');
+  const back = 56 /*label*/ + document.getElementById('tenses').offsetHeight
+             + document.getElementById('grid').offsetHeight
+             + document.getElementById('ex').offsetHeight + 80 /*padding+gaps*/;
+  inner.style.minHeight = Math.max(360, back) + 'px';
+}
+window.addEventListener('resize', ()=>{ if(cards.length) sizeCard(); });
 function render(){
   const n=cards.length,p=Progress.get(PAGE);
   document.getElementById('nTot').textContent=n;
