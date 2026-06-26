@@ -52,6 +52,15 @@
 </div>
 
 <script src="data.js"></script>
+<script src="edito.js"></script>
+<script src="edito-content.js"></script>
+<script src="edito-data-4-12.js"></script>
+<script src="edito-data-7-9.js"></script>
+<script src="edito-data-10-12.js"></script>
+<script src="edito-verbs-4-12.js"></script>
+<script src="edito-cahier-expr.js"></script>
+<script src="edito-verbs-extra.js"></script>
+<script src="edito-expr-extra.js"></script>
 <script src="shared.js"></script>
 <script>
 renderChrome('index');
@@ -71,6 +80,8 @@ const modules = [
     desc:'Артиклі, часи, заперечення, conditionnel, subjonctif.',    cnt:()=>GRAMMAR.length+' тем'},
   {href:'datetime.html',   num:'07', title:'Час і дата', tint:'mint',
     desc:'Дні, місяці, пори року, годинник — як сказати правильно.', cnt:()=>'дні · місяці · години'},
+  {href:'edito.html',      num:'É',  title:'Édito B1',   tint:'peach',
+    desc:'Слова, вирази, граматика й дієслова з підручника Édito B1 — UA · EN · DE.', cnt:()=>(typeof EDITO_WORDS!=='undefined'?EDITO_WORDS.length+' слів':'B1')},
 ];
 
 document.getElementById('modules').innerHTML = modules.map(m=>`

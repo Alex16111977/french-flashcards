@@ -11,6 +11,11 @@ const PAGES = [
   {id:'verbs',     href:'verbs.html',     label:'Дієслова',    ic:'05', tint:'butter', sec:'Теорія'},
   {id:'grammar',   href:'grammar.html',   label:'Граматика',   ic:'06', tint:'lilac',  sec:'Теорія'},
   {id:'datetime',  href:'datetime.html',  label:'Час і дата',  ic:'07', tint:'mint',   sec:'Теорія'},
+  {id:'edito',        href:'edito.html',            label:'Огляд',        ic:'É', tint:'peach',  sec:'Édito B1'},
+  {id:'edito-words',  href:'edito-words.html',      label:'Слова',        ic:'W', tint:'blush',  sec:'Édito B1'},
+  {id:'edito-expr',   href:'edito-expressions.html',label:'Вирази',       ic:'X', tint:'mint',   sec:'Édito B1'},
+  {id:'edito-grammar',href:'edito-grammar.html',    label:'Граматика',    ic:'G', tint:'lilac',  sec:'Édito B1'},
+  {id:'edito-verbs',  href:'edito-verbs.html',      label:'Дієслова',     ic:'V', tint:'butter', sec:'Édito B1'},
 ];
 
 function renderChrome(activeId){

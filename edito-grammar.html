@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Édito B1 · Граматика</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <section class="pagehead">
+    <div>
+      <div class="kicker">Édito B1 · Граматика за темами</div>
+      <h1>Граматика <em>grammaire</em></h1>
+      <p class="lede">Граматичні теми згідно з підручником, окремо за юнітами. Таблиці й примітки українською.</p>
+    </div>
+    <div class="meta">
+      <span>тем</span><b id="nTopics">—</b>
+    </div>
+  </section>
+
+  <div class="units" id="units"></div>
+  <div id="content"></div>
+</div>
+
+<script src="edito.js"></script>
+<script src="edito-content.js"></script>
+<script src="edito-data-4-12.js"></script>
+<script src="edito-data-7-9.js"></script>
+<script src="edito-data-10-12.js"></script>
+<script src="edito-verbs-4-12.js"></script>
+<script src="edito-cahier-expr.js"></script>
+<script src="edito-verbs-extra.js"></script>
+<script src="edito-expr-extra.js"></script>
+<script src="shared.js"></script>
+<script>
+renderChrome('edito-grammar');
+let unit='all';
+const allUnits=[...new Set(EDITO_GRAMMAR.map(g=>g.unit))].sort((a,b)=>a-b);
+document.getElementById('nTopics').textContent=EDITO_GRAMMAR.length;
+
+function renderUnits(){
+  document.getElementById('units').innerHTML =
+    `<button class="chip ${unit==='all'?'active':''}" data-u="all">Усі юніти · ${EDITO_GRAMMAR.length}</button>` +
+    allUnits.map(u=>`<button class="chip ${unit===u?'active':''}" data-u="${u}">U${u} · ${EDITO_UNITS[u]}</button>`).join('');
+  document.querySelectorAll('#units .chip').forEach(b=>b.onclick=()=>{unit=b.dataset.u==='all'?'all':+b.dataset.u;render();});
+}
+function table(t){
+  return `<table class="gtable" style="margin-top:12px"><thead><tr>${t.head.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
+    <tbody>${t.rows.map(r=>`<tr>${r.map((c,j)=>`<td${j===0?'':' class="fr"'}>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+}
+function render(){
+  renderUnits();
+  const list=EDITO_GRAMMAR.filter(g=>unit==='all'||g.unit===unit);
+  let html='', lastU=null;
+  for(const g of list){
+    if(g.unit!==lastU){ html+=`<div class="eyebrow" style="margin:26px 0 10px">Unité ${g.unit} · ${EDITO_UNITS[g.unit]}</div>`; lastU=g.unit; }
+    html+=`<div class="panel" style="margin-bottom:14px">
+      <h2>${g.fr}</h2>
+      <div style="color:var(--accent);font-weight:600;margin:2px 0 8px">${g.ua}</div>
+      <p style="color:var(--ink-2)">${g.note}</p>
+      ${(g.tables||[]).map(table).join('')}
+      ${g.notes?`<ul style="margin:14px 0 0 18px;color:var(--ink-2);line-height:1.7">${g.notes.map(n=>`<li>${n}</li>`).join('')}</ul>`:''}
+    </div>`;
+  }
+  document.getElementById('content').innerHTML=html;
+}
+render();
+</script>
+</body>
+</html>

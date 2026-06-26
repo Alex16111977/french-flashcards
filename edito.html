@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Édito B1 — Français</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <section class="pagehead">
+    <div>
+      <div class="kicker">Méthode · Édito B1 · 3e édition</div>
+      <h1>Édito <em>B1</em></h1>
+      <p class="lede">Слова, вирази, граматика й дієслова з підручника та робочого зошита. Кожна картка — українською, англійською та німецькою, з транскрипцією. Великий шрифт з обох боків.</p>
+    </div>
+    <div class="meta">
+      <span>карток</span><b id="totalCards">—</b>
+      <span style="margin-top:8px;display:block">юнітів</span><b id="totalUnits">—</b>
+    </div>
+  </section>
+
+  <div class="modgrid" id="decks"></div>
+
+  <div class="rule-soft"></div>
+
+  <div class="panel">
+    <div class="row" style="justify-content:space-between;align-items:baseline;margin-bottom:14px">
+      <h2>Юніти підручника</h2>
+      <span class="eyebrow" id="unitsDone">Units 1–12 ✓</span>
+    </div>
+    <div id="unitList" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px"></div>
+  </div>
+</div>
+
+<script src="edito.js"></script>
+<script src="edito-content.js"></script>
+<script src="edito-data-4-12.js"></script>
+<script src="edito-data-7-9.js"></script>
+<script src="edito-data-10-12.js"></script>
+<script src="edito-verbs-4-12.js"></script>
+<script src="edito-cahier-expr.js"></script>
+<script src="edito-verbs-extra.js"></script>
+<script src="edito-expr-extra.js"></script>
+<script src="shared.js"></script>
+<script>
+renderChrome('edito');
+
+const decks = [
+  {href:'edito-words.html',       num:'W', title:'Слова',     tint:'blush',
+    desc:'Словник з транскрипцією. FR + IPA → UA · EN · DE. Великий шрифт.', cnt:EDITO_WORDS.length+' слів'},
+  {href:'edito-expressions.html', num:'X', title:'Вирази',    tint:'mint',
+    desc:'Вирази, ідіоми та вигуки з обох книжок. UA + аналоги EN / DE.',   cnt:EDITO_EXPR.length+' виразів'},
+  {href:'edito-grammar.html',     num:'G', title:'Граматика', tint:'lilac',
+    desc:'Граматичні теми за юнітами: часи, субʼюнктив, conditionnel…',     cnt:EDITO_GRAMMAR.length+' тем'},
+  {href:'edito-verbs.html',       num:'V', title:'Дієслова',  tint:'butter',
+    desc:'Дієслова в усіх часах B1. Présent → subjonctif. UA · EN · DE.',   cnt:EDITO_VERBS.length+' дієслів'},
+];
+
+document.getElementById('decks').innerHTML = decks.map(d=>`
+  <a class="modtile tint-${d.tint}" href="${d.href}">
+    <div class="top"><div class="ico">${d.num}</div><span class="eyebrow">deck</span></div>
+    <div><h3>${d.title}</h3><p>${d.desc}</p></div>
+    <div class="foot"><span class="cnt">${d.cnt}</span><span class="arrow">→</span></div>
+  </a>`).join('');
+
+const units = [...new Set([...EDITO_WORDS,...EDITO_VERBS,...EDITO_GRAMMAR].map(x=>x.unit))].sort((a,b)=>a-b);
+document.getElementById('totalCards').textContent = EDITO_WORDS.length+EDITO_EXPR.length+EDITO_VERBS.length;
+document.getElementById('totalUnits').textContent = units.length;
+
+document.getElementById('unitList').innerHTML = Object.entries(EDITO_UNITS).map(([n,t])=>{
+  const has = units.includes(+n);
+  const wc = EDITO_WORDS.filter(w=>w.unit==n).length;
+  return `<div class="p" style="background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:12px 14px;${has?'':'opacity:.4'}">
+    <div style="font-weight:700">U${n} · ${t}</div>
+    <div style="font:500 11px 'JetBrains Mono';color:var(--mute);margin-top:3px">${has?wc+' слів':'незабаром'}</div>
+  </div>`;
+}).join('');
+</script>
+</body>
+</html>

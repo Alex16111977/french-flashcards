@@ -379,3 +379,53 @@ button{font:inherit;color:inherit}
   .fc-inner{height:230px}
   .fc-face .word{font-size:32px}
 }
+
+/* ============================================================
+   Édito B1 — large-font trilingual cards
+============================================================ */
+.bc-wrap{perspective:1400px;max-width:680px;margin:10px auto 0;cursor:pointer}
+.bc-inner{position:relative;min-height:360px;transition:transform .55s cubic-bezier(.2,.7,.2,1.1);transform-style:preserve-3d}
+.bc-inner.flip{transform:rotateY(180deg)}
+.bc-face{
+  position:absolute;inset:0;border-radius:var(--radius-lg);backface-visibility:hidden;
+  background:var(--paper);border:1px solid var(--rule);padding:34px 30px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:var(--shadow);
+}
+.bc-face.back{transform:rotateY(180deg);background:var(--pastel-peach);border-color:#ecc9a8}
+.bc-face .lbl{font:600 10px 'JetBrains Mono';letter-spacing:.28em;text-transform:uppercase;color:var(--mute);margin-bottom:18px}
+.bc-face .fr{font:800 58px/1.04 'Manrope';letter-spacing:-.02em;text-align:center;color:var(--ink)}
+.bc-face .fr.sm{font-size:40px}
+.bc-face .fr.xs{font-size:30px}
+.bc-face .ipa{font:500 22px 'JetBrains Mono';color:var(--accent);margin-top:16px}
+.bc-face .theme{margin-top:16px;font:500 11px 'JetBrains Mono';color:var(--mute);letter-spacing:.06em;text-transform:uppercase}
+.bc-face .hint{position:absolute;bottom:14px;font:400 11px 'JetBrains Mono';color:var(--mute)}
+
+/* trilingual back rows */
+.tri{display:flex;flex-direction:column;gap:14px;width:100%;max-width:460px}
+.tri .row3{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:baseline}
+.tri .flag{font:700 11px 'JetBrains Mono';letter-spacing:.06em;color:#fff;background:var(--mute);
+  border-radius:5px;padding:4px 0;text-align:center}
+.tri .flag.ua{background:#3a6b4c}.tri .flag.en{background:#2f5b84}.tri .flag.de{background:#8a6d1d}
+.tri .val{font:700 30px/1.18 'Manrope';letter-spacing:-.01em;color:var(--ink)}
+.tri .val.sm{font-size:23px;font-weight:600}
+
+/* unit chips */
+.units{display:flex;gap:6px;overflow-x:auto;padding:4px 0 12px;scrollbar-width:none;flex-wrap:wrap}
+.units::-webkit-scrollbar{display:none}
+
+/* verb conjugation on card back */
+.vb-tenses{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.vb-tense{font:600 11px 'JetBrains Mono';padding:5px 9px;border-radius:6px;border:1px solid var(--rule);
+  background:var(--paper);cursor:pointer;color:var(--ink-2);white-space:nowrap}
+.vb-tense.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.vb-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 26px;width:100%;max-width:480px}
+.vb-grid .ln{display:flex;justify-content:flex-start;gap:10px;border-bottom:1px dashed var(--rule);padding:6px 0;font-size:19px}
+.vb-grid .ln b{font-weight:600;color:var(--ink)}
+.vb-cap{margin-top:2px;font:500 12px 'JetBrains Mono';color:var(--mute);text-align:center}
+
+@media(max-width:860px){
+  .bc-face .fr{font-size:42px}.bc-face .fr.sm{font-size:30px}.bc-face .fr.xs{font-size:24px}
+  .tri .val{font-size:23px}.tri .val.sm{font-size:19px}
+  .vb-grid{grid-template-columns:1fr}.vb-grid .ln{font-size:17px}
+  .bc-inner{min-height:330px}
+}
