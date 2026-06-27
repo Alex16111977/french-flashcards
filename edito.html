@@ -24,6 +24,24 @@
 
   <div class="rule-soft"></div>
 
+  <div class="panel" style="margin-bottom:14px">
+    <div class="row" style="justify-content:space-between;align-items:baseline;margin-bottom:6px">
+      <h2>Сьогодні</h2><span class="eyebrow">прогрес зберігається у браузері</span>
+    </div>
+    <div class="statstrip" style="margin:6px 0 16px">
+      <span>серія 🔥 <b id="hStreak">0</b> дн.</span>
+      <span>повторено сьогодні <b id="hToday">0</b></span>
+      <span>пора повторити <b id="hDue">0</b></span>
+    </div>
+    <h3 style="margin-bottom:6px">Експорт в Anki</h3>
+    <p style="color:var(--ink-2);font-size:13.5px;margin-bottom:12px;max-width:60ch">Завантаж .txt (таб-розділений) і імпортуй у застосунок <b>Anki</b> на телефоні — отримаєш ті самі картки зі справжніми інтервальними повтореннями й синхронізацією між пристроями.</p>
+    <div class="row">
+      <button class="btn" id="expW">⬇ Слова</button>
+      <button class="btn" id="expX">⬇ Вирази</button>
+      <button class="btn" id="expV">⬇ Дієслова (з відмінюванням)</button>
+    </div>
+  </div>
+
   <div class="panel">
     <div class="row" style="justify-content:space-between;align-items:baseline;margin-bottom:14px">
       <h2>Юніти підручника</h2>
@@ -42,6 +60,7 @@
 <script src="edito-cahier-expr.js"></script>
 <script src="edito-verbs-extra.js"></script>
 <script src="edito-expr-extra.js"></script>
+<script src="edito-srs.js"></script>
 <script src="shared.js"></script>
 <script>
 renderChrome('edito');
@@ -49,6 +68,8 @@ renderChrome('edito');
 const decks = [
   {href:'edito-words.html',       num:'W', title:'Слова',     tint:'blush',
     desc:'Словник з транскрипцією. FR + IPA → UA · EN · DE. Великий шрифт.', cnt:EDITO_WORDS.length+' слів'},
+  {href:'edito-quiz.html',        num:'Q', title:'Квіз',      tint:'sky',
+    desc:'Активне пригадування: вибір, введення, на слух. З інтервальними повтореннями.', cnt:'3 режими'},
   {href:'edito-expressions.html', num:'X', title:'Вирази',    tint:'mint',
     desc:'Вирази, ідіоми та вигуки з обох книжок. UA + аналоги EN / DE.',   cnt:EDITO_EXPR.length+' виразів'},
   {href:'edito-grammar.html',     num:'G', title:'Граматика', tint:'lilac',
@@ -76,6 +97,29 @@ document.getElementById('unitList').innerHTML = Object.entries(EDITO_UNITS).map(
     <div style="font:500 11px 'JetBrains Mono';color:var(--mute);margin-top:3px">${has?wc+' слів':'незабаром'}</div>
   </div>`;
 }).join('');
+
+/* ---- today / streak ---- */
+const dueAll = SRS.queue('edito-words',EDITO_WORDS.map(w=>w.fr),20).length
+             + SRS.queue('edito-expr', EDITO_EXPR.map(e=>e.fr),20).length
+             + SRS.queue('edito-verbs',EDITO_VERBS.map(v=>v.fr),20).length;
+document.getElementById('hStreak').textContent=Streak.current();
+document.getElementById('hToday').textContent=Streak.todayCount();
+document.getElementById('hDue').textContent=dueAll;
+
+/* ---- Anki export (tab-separated, Basic note) ---- */
+const esc=s=>(s||'').replace(/[\t\n\r]/g,' ');
+function tsv(rows){return '#separator:tab\n#html:true\n'+rows.map(r=>r.join('\t')).join('\n');}
+function dl(name,text){const b=new Blob([text],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');
+  a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove();}
+document.getElementById('expW').onclick=()=>dl('edito-mots.txt',tsv(EDITO_WORDS.map(w=>[
+  esc(w.fr)+(w.ipa?' <br>['+esc(w.ipa)+']':''),
+  esc(w.ua)+'<br>EN: '+esc(w.en)+'<br>DE: '+esc(w.de)+'<br><i>U'+w.unit+' · '+esc(w.theme)+'</i>'])));
+document.getElementById('expX').onclick=()=>dl('edito-expressions.txt',tsv(EDITO_EXPR.map(e=>[
+  esc(e.fr), esc(e.ua)+'<br>EN: '+esc(e.en)+'<br>DE: '+esc(e.de)])));
+document.getElementById('expV').onclick=()=>dl('edito-verbes.txt',tsv(EDITO_VERBS.map(v=>[
+  esc(v.fr),
+  esc(v.ua)+' · '+esc(v.en)+' · '+esc(v.de)+'<br>'+EDITO_TENSES.map(t=>'<b>'+t+':</b> '+esc(v.conj[t].join(', '))).join('<br>')
+  +(v.example?'<br><i>'+esc(v.example)+'</i>':'')])));
 </script>
 </body>
 </html>

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Édito B1 · Квіз</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <section class="pagehead">
+    <div>
+      <div class="kicker">Édito B1 · Активне пригадування</div>
+      <h1>Квіз <em>quiz</em></h1>
+      <p class="lede">Перевір себе: вибір, введення слова та на слух. Правильні відповіді відсувають слово далі в інтервальних повтореннях.</p>
+    </div>
+    <div class="meta">
+      <span>рахунок</span><b id="score">0/0</b>
+      <span style="margin-top:8px;display:block">серія 🔥</span><b id="streak" style="color:var(--accent)">0</b>
+    </div>
+  </section>
+
+  <div class="row" style="gap:10px;margin-bottom:10px">
+    <div class="segbar" id="modes">
+      <button class="chip active" data-m="choice">Вибір</button>
+      <button class="chip" data-m="type">Введення</button>
+      <button class="chip" data-m="listen">На слух</button>
+    </div>
+    <div style="flex:1"></div>
+    <button class="btn ghost" id="restart">↻ Спочатку</button>
+  </div>
+
+  <div class="units" id="units"></div>
+
+  <div class="panel" style="margin-top:6px">
+    <div class="qstem">
+      <div class="q" id="qkind">français → українською</div>
+      <div class="w" id="qword">—</div>
+      <div class="mono" id="qipa" style="color:var(--mute);margin-top:6px"></div>
+      <button class="ctrl sp" id="qplay" title="Прослухати" style="margin:10px auto 0;display:none">🔊</button>
+    </div>
+
+    <div class="qopts" id="opts"></div>
+
+    <form id="typeForm" style="display:none;text-align:center">
+      <input class="tinput" id="tinput" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="напиши французькою…">
+      <div><button class="btn" type="submit" id="checkBtn">Перевірити</button></div>
+      <div id="typeFb" class="mono" style="margin-top:10px;min-height:20px"></div>
+    </form>
+
+    <div class="prog" style="margin-top:16px"><span id="qbar" style="width:0"></span></div>
+  </div>
+</div>
+
+<script src="edito.js"></script>
+<script src="edito-content.js"></script>
+<script src="edito-data-4-12.js"></script>
+<script src="edito-data-7-9.js"></script>
+<script src="edito-data-10-12.js"></script>
+<script src="edito-verbs-4-12.js"></script>
+<script src="edito-cahier-expr.js"></script>
+<script src="edito-verbs-extra.js"></script>
+<script src="edito-expr-extra.js"></script>
+<script src="edito-srs.js"></script>
+<script src="shared.js"></script>
+<script>
+renderChrome('edito-quiz');
+const DECK='edito-words';
+let mode='choice', unit='all', pool=[], q=null, right=0, total=0;
+const allUnits=[...new Set(EDITO_WORDS.map(w=>w.unit))].sort((a,b)=>a-b);
+const clean = s => (s||'').toLowerCase().normalize('NFC').replace(/[(),.;!?…/=]/g,' ').replace(/\s+/g,' ').trim();
+const speakClean = fr => speakFR(fr.replace(/\s*=.*$/,'').replace(/\([^)]*\)/g,''));
+
+function buildPool(){ pool = EDITO_WORDS.filter(w=>unit==='all'||w.unit===unit); }
+function renderUnits(){
+  document.getElementById('units').innerHTML =
+    `<button class="chip ${unit==='all'?'active':''}" data-u="all">Усі · ${EDITO_WORDS.length}</button>` +
+    allUnits.map(u=>`<button class="chip ${unit===u?'active':''}" data-u="${u}">U${u} · ${EDITO_UNITS[u]}</button>`).join('');
+  document.querySelectorAll('#units .chip').forEach(b=>b.onclick=()=>{
+    unit=b.dataset.u==='all'?'all':+b.dataset.u; buildPool(); next();
+  });
+}
+function setScore(){
+  document.getElementById('score').textContent=right+'/'+total;
+  document.getElementById('streak').textContent=Streak.current();
+  document.getElementById('qbar').style.width=(total?Math.round(right/total*100):0)+'%';
+}
+function next(){
+  renderUnits();
+  if(pool.length<4){document.getElementById('qword').textContent='замало карток';return;}
+  q = pick(pool);
+  const opts=document.getElementById('opts'), tf=document.getElementById('typeForm');
+  document.getElementById('qplay').style.display='none';
+  document.getElementById('qipa').textContent='';
+  if(mode==='type'){
+    opts.style.display='none'; tf.style.display='block';
+    document.getElementById('qkind').textContent='українською → français';
+    document.getElementById('qword').textContent=q.ua;
+    const inp=document.getElementById('tinput'); inp.value=''; inp.className='tinput'; inp.focus();
+    document.getElementById('typeFb').textContent='';
+  } else {
+    tf.style.display='none'; opts.style.display='grid';
+    const wrong = shuffle(pool.filter(w=>w.ua!==q.ua)).slice(0,3);
+    const choices = shuffle([q,...wrong]);
+    if(mode==='listen'){
+      document.getElementById('qkind').textContent='на слух → українською';
+      document.getElementById('qword').textContent='🔊';
+      const p=document.getElementById('qplay'); p.style.display='grid'; p.onclick=()=>speakClean(q.fr);
+      speakClean(q.fr);
+    } else {
+      document.getElementById('qkind').textContent='français → українською';
+      document.getElementById('qword').textContent=q.fr;
+      document.getElementById('qipa').textContent=q.ipa?'['+q.ipa+']':'';
+    }
+    opts.innerHTML = choices.map((c,k)=>
+      `<button class="qopt" data-ua="${c.ua.replace(/"/g,'&quot;')}"><span class="k">${'ABCD'[k]}</span>${c.ua}</button>`).join('');
+    opts.querySelectorAll('.qopt').forEach(b=>b.onclick=()=>answer(b, b.dataset.ua===q.ua, b));
+  }
+}
+function grade(ok){
+  total++; if(ok)right++;
+  SRS.review(DECK, q.fr, ok?'good':'hard');
+  Progress[ok?'addKnown':'addUnknown'](DECK, q.fr);
+  setScore();
+}
+function answer(btn, ok){
+  const opts=document.getElementById('opts');
+  opts.querySelectorAll('.qopt').forEach(b=>{
+    b.classList.add('dis');
+    if(b.dataset.ua===q.ua)b.classList.add('ok');
+  });
+  if(!ok)btn.classList.add('no');
+  grade(ok);
+  setTimeout(next, ok?650:1500);
+}
+document.getElementById('typeForm').onsubmit=e=>{
+  e.preventDefault();
+  const inp=document.getElementById('tinput'); const ok=clean(inp.value)===clean(q.fr) ||
+    clean(q.fr).split(' = ').some(v=>clean(inp.value)===clean(v));
+  inp.classList.add(ok?'ok':'no');
+  document.getElementById('typeFb').innerHTML = ok ? '✓ правильно' : '✗ правильно: <b>'+q.fr+'</b>';
+  grade(ok);
+  setTimeout(next, ok?700:1700);
+};
+
+document.querySelectorAll('#modes .chip').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#modes .chip').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); mode=b.dataset.m; next();
+});
+document.getElementById('restart').onclick=()=>{right=0;total=0;setScore();next();};
+
+buildPool(); setScore(); next();
+</script>
+</body>
+</html>
