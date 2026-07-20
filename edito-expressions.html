@@ -78,7 +78,11 @@ const PAGE='edito-expr';
 const CATLABELS={all:'Усі',idiome:'Ідіоми',viguk:'Вигуки',intro:'Ввідні фрази',renf:'Підсилення',expr:'Вирази'};
 const CATORDER=['idiome','viguk','intro','renf','expr'];
 const catOf=e=>e.cat||'expr';
-let cat='all', cards=EDITO_EXPR.slice(), i=0;
+let cat='all', cards=EDITO_EXPR.slice(), i=0, reviewMode=false;
+function setReviewBtn(){const b=document.getElementById('reviewBtn');b.classList.toggle('on',reviewMode);
+  b.firstChild.textContent=reviewMode?'✕ Вийти з повторення (':'↻ Повторити (';}
+function applyCat(){reviewMode=false;setReviewBtn();
+  cards=cat==='all'?EDITO_EXPR.slice():EDITO_EXPR.filter(e=>catOf(e)===cat);i=0;render();}
 
 function renderCats(){
   const counts={};EDITO_EXPR.forEach(e=>{const c=catOf(e);counts[c]=(counts[c]||0)+1});
@@ -88,9 +92,7 @@ function renderCats(){
   }
   document.getElementById('cats').innerHTML=html;
   document.querySelectorAll('#cats .chip').forEach(b=>b.onclick=()=>{
-    cat=b.dataset.c;
-    cards=cat==='all'?EDITO_EXPR.slice():EDITO_EXPR.filter(e=>catOf(e)===cat);
-    i=0;render();
+    cat=b.dataset.c; applyCat();
   });
 }
 function fit(el,text){
@@ -123,10 +125,10 @@ function mark(ok){if(!cards.length)return;const c=cards[i];
   document.getElementById('dueN').textContent=SRS.queue(PAGE,EDITO_EXPR.map(e=>e.fr),20).length;
   toast(ok?'✓ вивчено':'↺ повторимо');setTimeout(()=>go(1),220);}
 function loadReview(){
-  cat='all';
+  reviewMode=true; cat='all';
   const map=new Map(EDITO_EXPR.map(e=>[e.fr,e]));
   cards=SRS.queue(PAGE,EDITO_EXPR.map(e=>e.fr),20).map(k=>map.get(k)).filter(Boolean);
-  i=0;render();
+  i=0;render();setReviewBtn();
   toast(cards.length?('на повторення: '+cards.length):'усе повторено — почни нові');
 }
 
@@ -137,7 +139,7 @@ document.getElementById('okBtn').onclick=e=>{e.stopPropagation();mark(true)};
 document.getElementById('noBtn').onclick=e=>{e.stopPropagation();mark(false)};
 document.getElementById('spBtn').onclick=e=>{e.stopPropagation();if(cards[i])speakFR(cards[i].fr)};
 document.getElementById('shuffleBtn').onclick=()=>{cards=shuffle(cards);i=0;render();toast('перемішано')};
-document.getElementById('reviewBtn').onclick=loadReview;
+document.getElementById('reviewBtn').onclick=()=>{ reviewMode?applyCat():loadReview(); };
 document.getElementById('streak').textContent=Streak.current();
 document.getElementById('dueN').textContent=SRS.queue(PAGE,EDITO_EXPR.map(e=>e.fr),20).length;
 document.addEventListener('keydown',e=>{

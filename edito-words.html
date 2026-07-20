@@ -78,11 +78,14 @@
 <script>
 renderChrome('edito-words');
 const PAGE='edito-words';
-let unit='all', theme=null, cards=[], i=0;
+let unit='all', theme=null, cards=[], i=0, reviewMode=false;
 
 const allUnits = [...new Set(EDITO_WORDS.map(w=>w.unit))].sort((a,b)=>a-b);
 
+function setReviewBtn(){const b=document.getElementById('reviewBtn');b.classList.toggle('on',reviewMode);
+  b.firstChild.textContent=reviewMode?'✕ Вийти з повторення (':'↻ Повторити (';}
 function load(){
+  reviewMode=false; setReviewBtn();
   let base = EDITO_WORDS.filter(w=>unit==='all'||w.unit===unit);
   if(theme) base = base.filter(w=>w.theme===theme);
   cards = base; i = 0;
@@ -138,10 +141,10 @@ function mark(ok){if(!cards.length)return;const c=cards[i];
   document.getElementById('dueN').textContent=SRS.queue(PAGE,EDITO_WORDS.map(w=>w.fr),20).length;
   toast(ok?'✓ вивчено':'↺ повторимо');setTimeout(()=>go(1),220);}
 function loadReview(){
-  unit='all';theme=null;
+  reviewMode=true; unit='all'; theme=null;
   const map=new Map(EDITO_WORDS.map(w=>[w.fr,w]));
   cards=SRS.queue(PAGE,EDITO_WORDS.map(w=>w.fr),20).map(k=>map.get(k)).filter(Boolean);
-  i=0;renderUnits();renderThemes();render();
+  i=0;renderUnits();renderThemes();render();setReviewBtn();
   toast(cards.length?('на повторення: '+cards.length):'усе повторено — почни нові');
 }
 
@@ -152,7 +155,7 @@ document.getElementById('okBtn').onclick=e=>{e.stopPropagation();mark(true)};
 document.getElementById('noBtn').onclick=e=>{e.stopPropagation();mark(false)};
 document.getElementById('spBtn').onclick=e=>{e.stopPropagation();if(cards[i])speakFR(cards[i].fr.replace(/\s*=.*$/,'').replace(/\([^)]*\)/g,''))};
 document.getElementById('shuffleBtn').onclick=()=>{cards=shuffle(cards);i=0;render();toast('перемішано')};
-document.getElementById('reviewBtn').onclick=loadReview;
+document.getElementById('reviewBtn').onclick=()=>{ reviewMode?load():loadReview(); };
 document.getElementById('streak').textContent=Streak.current();
 document.getElementById('dueN').textContent=SRS.queue(PAGE,EDITO_WORDS.map(w=>w.fr),20).length;
 document.addEventListener('keydown',e=>{
